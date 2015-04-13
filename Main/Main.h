@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "../SFMLEngine/ZEngineWindow.h"
+#include "../ZEngine/ZEngineWindow.h"
 
 class Main
 {

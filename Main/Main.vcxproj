@@ -17,13 +17,8 @@
     <ClInclude Include="Main.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SFMLEngine\SFMLEngine.vcxproj">
-      <Project>{f5fc9b67-2e07-4a8a-b642-b7b33a4a1fc5}</Project>
-      <Private>false</Private>
-      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
-      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
-      <LinkLibraryDependencies>true</LinkLibraryDependencies>
-      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    <ProjectReference Include="..\ZEngine\ZEngine.vcxproj">
+      <Project>{58e6dc74-49fc-40ba-8a66-799f5ec4c271}</Project>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">

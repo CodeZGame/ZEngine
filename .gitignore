@@ -9,6 +9,7 @@
 *.exe
 *.idb
 *.obj
+*.opensdf
 *.o
 *.log
 *.tlog
