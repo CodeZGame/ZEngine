@@ -1,23 +1,23 @@
 //-----------------------------------------------------------
-// Main.h
+// ZEngineWindow.h
 //-----------------------------------------------------------
 
 #pragma once
 
 #include <string>
-#include "SFML\Window.hpp"
+#include "SFML\Graphics\RenderWindow.hpp"
 #include "SFML\System\Vector2.hpp"
-#include "Vector2D.h"
+#include "Vector2D.hpp"
 
 namespace ZEngine
 {
-
 	class CZEngineWindow
 	{
 	protected:
-		sf::Window m_Window;
-		sf::Vector2u m_nWindowSize;
-		sf::Vector2i m_nWindowPosition;
+		sf::RenderWindow m_Window;
+		CVector2D<int> m_nWindowSize;
+		CVector2D<int> m_nWindowPosition;
+		bool m_bVerticalSync;
 
 	public:
 		CZEngineWindow();
@@ -28,17 +28,22 @@ namespace ZEngine
 		void Process();
 
 		//Getters
+		bool HasFocus() const;
+		bool IsOpen() const;
+		CVector2D<int> GetPosition() const;
+		CVector2D<int> GetSize() const;
 
 		//Setters
 		void SetTitle(char * p_pTitle);
 		void SetSize(int p_nWidth, int p_nHeight);
+		void SetSize(CVector2D<int> & p_rSize);
 		void SetPosition(int p_nPosX, int p_nPosY);
-
-		//Templated setters
-		template<typename T>
-		void SetSize(CVector2D<T> & p_rSize);
-		template<typename T>
-		void SetPosition(CVector2D<T> & p_rPos);
+		void SetPosition(CVector2D<int> & p_rPos);
+		void SetVerticalSync(bool p_bSync);
+		void SetMouseVisible(bool p_bMouseVisible);
+		
+		
+		void RequestFocus();
 	};
 
 }
