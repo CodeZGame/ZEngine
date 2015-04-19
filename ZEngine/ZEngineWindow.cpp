@@ -5,9 +5,9 @@
 #include <string>
 #include "SFML\Window\Event.hpp"
 #include "ZEngineWindow.h"
+#include "ZRenderer.h"
 
 using namespace ZEngine;
-
 
 //-----------------------------------------------------------
 //
@@ -16,6 +16,7 @@ CZEngineWindow :: CZEngineWindow()
 {
 	m_nWindowSize.x = 0;
 	m_nWindowSize.y = 0;
+	m_Renderer.SetWindowOwner(this);
 }
 
 //-----------------------------------------------------------
@@ -43,21 +44,34 @@ void CZEngineWindow::Create(const int p_nWith, const int p_nHeight, const char *
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-void CZEngineWindow :: Process()
+bool CZEngineWindow :: Process()
 {
 	sf::Event event;
 	while (m_Window.pollEvent(event))
 	{
 		// "close requested" event: we close the window
 		if (event.type == sf::Event::Closed)
+		{
 			m_Window.close();
+			return false;
+		}
 	}
 
 	m_Window.clear();
 
+	m_Renderer.Process();
+
 	m_Window.display();
+	return true;
 }
 
+//-----------------------------------------------------------
+//
+//----------------------------------------------------------
+void CZEngineWindow :: AddDrawableInstance(ZInstance * p_pZInstance)
+{
+	m_Renderer.AddDrawableInstance(p_pZInstance);
+}
 
 //-----------------------------------------------------------
 //

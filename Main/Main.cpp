@@ -4,6 +4,7 @@
 
 #include <tchar.h>
 #include "Main.h"
+#include "../ZEngine/ZShape.h"
 
 //-----------------------------------------------------------
 //
@@ -32,12 +33,17 @@ void Main :: Init()
 void Main :: Start()
 {
 	m_ZEngineWindow.Create(800, 600, "My Window");
-	ZEngine::CVector2D<int> pos(0, 0);
+
+	ZEngine::CZShape * circle = ZEngine::CZShape::Create(ZEngine::ZShapeType::e_Shape_Circle, m_ZEngineWindow, CVector2Df(50.0f, 50.0f));
+
+	circle->SetInnerColor(ZColor::Transparent());
+	circle->SetOutterColor(ZColor::White());
+	circle->SetThickness(1.0f);
 
 	while (1)
 	{
-		m_ZEngineWindow.Process();
-		m_ZEngineWindow.SetPosition(pos.x, pos.y);
+		if (!m_ZEngineWindow.Process())
+			return;
 	}
 }
 

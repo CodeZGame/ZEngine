@@ -80,13 +80,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ZRenderer.h" />
+    <ClInclude Include="ZColor.h" />
     <ClInclude Include="Vector2D.hpp" />
     <ClInclude Include="ZengineDebug.h" />
     <ClInclude Include="ZEngineWindow.h" />
+    <ClInclude Include="ZInstance.h" />
+    <ClInclude Include="ZShape.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ZColor.cpp" />
+    <ClCompile Include="ZRenderer.cpp" />
     <ClCompile Include="ZengineDebug.cpp" />
     <ClCompile Include="ZEngineWindow.cpp" />
+    <ClCompile Include="ZInstance.cpp" />
+    <ClCompile Include="ZShape.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
