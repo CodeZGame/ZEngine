@@ -4,13 +4,8 @@
 
 #pragma once
 
-#include "../ZEngine/ZEngineWindow.h"
-
 class Main
 {
-protected:
-	ZEngine::CZEngineWindow m_ZEngineWindow;
-
 public:
 	Main();
 	~Main();

@@ -1,74 +1,89 @@
 //-----------------------------------------------------------
-// ZEngineWindow.cpp
+// ZWindow.cpp
 //----------------------------------------------------------
 
 #include <string>
 #include "SFML\Window\Event.hpp"
-#include "ZEngineWindow.h"
+#include "ZWindow.h"
 #include "ZRenderer.h"
+#include "ZUtils.h"
 
 using namespace ZEngine;
+
+#define DEFAULT_WINDOW_WIDTH		800
+#define DEFAULT_WINDOW_HEIGHT		600
 
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-CZEngineWindow :: CZEngineWindow()
+CZWindow::CZWindow()
 {
-	m_nWindowSize.x = 0;
-	m_nWindowSize.y = 0;
+}
+
+//-----------------------------------------------------------
+//
+//-----------------------------------------------------------
+CZWindow::CZWindow(const int p_nWith, const int p_nHeight, const char * p_tWindowName)
+	:	m_nWindowSize(p_nWith, p_nHeight),
+		m_sfmlWindow(sf::VideoMode(p_nWith, p_nHeight), p_tWindowName)
+{
 	m_Renderer.SetWindowOwner(this);
 }
 
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-CZEngineWindow :: ~CZEngineWindow()
+CZWindow :: ~CZWindow()
 {
 }
+
+////-----------------------------------------------------------
+////
+////-----------------------------------------------------------
+//void CZWindow::Create(const int p_nWith, const int p_nHeight, const char * p_tWindowName)
+//{
+//	m_sfmlWindow.create(sf::VideoMode(p_nWith, p_nHeight), p_tWindowName);
+//
+//	m_bVerticalSync = false;
+//	m_nWindowSize.x = p_nWith;
+//	m_nWindowSize.y = p_nHeight;
+//	sf::Vector2i pfPos = m_sfmlWindow.getPosition();
+//	m_nWindowPosition.x = pfPos.x;
+//	m_nWindowPosition.y = pfPos.y;
+//}
 
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-void CZEngineWindow::Create(const int p_nWith, const int p_nHeight, const char * p_tWindowName)
-{
-	m_Window.create(sf::VideoMode(p_nWith, p_nHeight), p_tWindowName);
-
-	m_bVerticalSync = false;
-	m_nWindowSize.x = p_nWith;
-	m_nWindowSize.y = p_nHeight;
-	sf::Vector2i pfPos = m_Window.getPosition();
-	m_nWindowPosition.x = pfPos.x;
-	m_nWindowPosition.y = pfPos.y;
-}
-
-//-----------------------------------------------------------
-//
-//-----------------------------------------------------------
-bool CZEngineWindow :: Process()
+bool CZWindow :: Process()
 {
 	sf::Event event;
-	while (m_Window.pollEvent(event))
+	while (m_sfmlWindow.pollEvent(event))
 	{
 		// "close requested" event: we close the window
 		if (event.type == sf::Event::Closed)
 		{
-			m_Window.close();
+			m_sfmlWindow.close();
 			return false;
 		}
 	}
 
-	m_Window.clear();
+	// Clear WHITE
+	m_sfmlWindow.clear();
+
+	// Clear BLACK
+	//m_sfmlWindow.clear(sf::Color(255, 255, 255));
 
 	m_Renderer.Process();
 
-	m_Window.display();
+	m_sfmlWindow.display();
 	return true;
 }
 
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-void CZEngineWindow :: AddDrawableInstance(ZInstance * p_pZInstance)
+void CZWindow :: AddDrawableInstance(CZInstance * p_pZInstance)
 {
 	m_Renderer.AddDrawableInstance(p_pZInstance);
 }
@@ -76,23 +91,31 @@ void CZEngineWindow :: AddDrawableInstance(ZInstance * p_pZInstance)
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-bool CZEngineWindow :: HasFocus() const
+void CZWindow :: RemoveDrawableInstance(CZInstance * p_pZInstance)
 {
-	return m_Window.hasFocus();
+	m_Renderer.RemoveDrawableInstance(p_pZInstance);
 }
 
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-bool CZEngineWindow :: IsOpen() const
+bool CZWindow :: HasFocus() const
 {
-	return m_Window.isOpen();
+	return m_sfmlWindow.hasFocus();
 }
 
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-CVector2D<int> CZEngineWindow :: GetPosition() const
+bool CZWindow :: IsOpen() const
+{
+	return m_sfmlWindow.isOpen();
+}
+
+//-----------------------------------------------------------
+//
+//----------------------------------------------------------
+CVector2D<int> CZWindow :: GetPosition() const
 {
 	return m_nWindowPosition;
 }
@@ -100,7 +123,7 @@ CVector2D<int> CZEngineWindow :: GetPosition() const
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-CVector2D<int> CZEngineWindow :: GetSize() const
+CVector2D<int> CZWindow :: GetSize() const
 {
 	return m_nWindowSize;
 }
@@ -108,62 +131,62 @@ CVector2D<int> CZEngineWindow :: GetSize() const
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-void CZEngineWindow :: RequestFocus()
+void CZWindow :: RequestFocus()
 {
-	m_Window.requestFocus();
+	m_sfmlWindow.requestFocus();
 }
 
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-void CZEngineWindow :: SetSize(CVector2D<int> & p_rSize)
+void CZWindow :: SetSize(CVector2D<int> & p_rSize)
 {
 	m_nWindowSize.x = p_rSize.x;
 	m_nWindowSize.y = p_rSize.y;
-	m_Window.setSize(sf::Vector2u(p_rSize.x, p_rSize.y));
+	m_sfmlWindow.setSize(ZVectorToSfu(p_rSize));
 }
 
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-void CZEngineWindow :: SetSize(int p_nWidth, int p_nHeight)
+void CZWindow :: SetSize(int p_nWidth, int p_nHeight)
 {
 	m_nWindowSize.x = p_nWidth;
 	m_nWindowSize.y = p_nHeight;
-	m_Window.setSize(sf::Vector2u(p_nWidth, p_nHeight));
+	m_sfmlWindow.setSize(sf::Vector2u(p_nWidth, p_nHeight));
 }
 
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-void CZEngineWindow :: SetPosition(int p_nPosX, int p_nPosY)
+void CZWindow :: SetPosition(int p_nPosX, int p_nPosY)
 {
 	m_nWindowPosition.x = p_nPosX;
 	m_nWindowPosition.y = p_nPosY;
-	m_Window.setPosition(sf::Vector2i(p_nPosX, p_nPosY));
+	m_sfmlWindow.setPosition(sf::Vector2i(p_nPosX, p_nPosY));
 }
 
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-void CZEngineWindow :: SetPosition(CVector2D<int> & p_rPos)
+void CZWindow :: SetPosition(CVector2D<int> & p_rPos)
 {
 	m_nWindowPosition = p_rPos;
-	m_Window.setPosition(sf::Vector2i(p_rPos.x, p_rPos.y));
+	m_sfmlWindow.setPosition(sf::Vector2i(p_rPos.x, p_rPos.y));
 }
 
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-void CZEngineWindow :: SetVerticalSync(bool p_bSync)
+void CZWindow :: SetVerticalSync(bool p_bSync)
 {
-	m_Window.setVerticalSyncEnabled(p_bSync);
+	m_sfmlWindow.setVerticalSyncEnabled(p_bSync);
 }
 
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-void CZEngineWindow :: SetMouseVisible(bool p_bMouseVisible)
+void CZWindow :: SetMouseVisible(bool p_bMouseVisible)
 {
-	m_Window.setMouseCursorVisible(p_bMouseVisible);
+	m_sfmlWindow.setMouseCursorVisible(p_bMouseVisible);
 }

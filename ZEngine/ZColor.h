@@ -9,7 +9,7 @@
 union ZColor
 {
 	ZColor();
-	ZColor(int p_nHexaColor);
+	ZColor(int p_nHexaColor, float p_fAlpha = 1.0f);
 
 	struct
 	{
@@ -24,10 +24,9 @@ union ZColor
 	void operator=(const ZColor& p_Color);
 	void operator=(int p_nHexaColor);
 
-	static int Black() { return 0x000000FF; }
-	static int White() { return 0xFFFFFFFF; }
-	static int Red() { return 0xFF0000FF; }
-	static int Green() { return 0x00FF00FF; }
-	static int Blue() { return 0x0000FFFF; }
-	static int Transparent() { return 0x00000000; }
+	static int Black() { return 0x000000; }
+	static int White() { return 0xFFFFFF; }
+	static int Red() { return 0xFF0000; }
+	static int Green() { return 0x00FF00; }
+	static int Blue() { return 0x0000FF; }
 };

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------
-// ZEngineWindow.h
+// ZWindow.h
 //-----------------------------------------------------------
 
 #pragma once
@@ -9,29 +9,35 @@
 #include "SFML\System\Vector2.hpp"
 #include "Vector2D.hpp"
 #include "ZRenderer.h"
+#include "ZWindowManager.h"
+#include "ZDebug.h"
 
 namespace ZEngine
 {
-	class CZEngineWindow
+	class CZWindow
 	{
 	protected:
-		sf::RenderWindow m_Window;
+		sf::RenderWindow m_sfmlWindow;
 		CVector2D<int> m_nWindowSize;
 		CVector2D<int> m_nWindowPosition;
 		bool m_bVerticalSync;
 
 		CZRenderer m_Renderer;
 
-	public:
-		static CZEngineWindow ms_Current;
-		CZEngineWindow();
-		~CZEngineWindow();
+		//Hide Constructor
+		CZWindow();
+		CZWindow(const int p_nWith, const int p_nHeight, const char * p_tWindowName);
 
-		void Create(const int p_nWith, const int p_nHeight, const char * p_tWindowName);
+	public:
+		~CZWindow();
+
+		void Create();
 
 		bool Process();
 
-		void AddDrawableInstance(ZInstance * p_pZInstance);
+		void AddDrawableInstance(CZInstance * p_pZInstance);
+
+		void RemoveDrawableInstance(CZInstance * p_pZInstance);
 
 		//Getters
 		bool HasFocus() const;
@@ -49,10 +55,15 @@ namespace ZEngine
 		void SetVerticalSync(bool p_bSync);
 		void SetMouseVisible(bool p_bMouseVisible);
 		
+		void IsResizable(bool p_bIsResizable);
 		
 		void RequestFocus();
 
+		//Friend zone
 		friend void CZRenderer::Process();
+		friend void CZRenderer::ProcessDrawDebug();
+
+		friend CZWindowManager;
 	};
 
 }

@@ -4,35 +4,53 @@
 
 #include "ZInstance.h"
 #include "ZRenderer.h"
-#include "ZEngineWindow.h"
+#include "ZWindow.h"
 
 using namespace ZEngine;
 
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-ZInstance::ZInstance(CZEngineWindow & p_pWindowOwner)
-	: m_bRessourceLoaded(false), m_bIsActive(false), m_pDrawable(nullptr)
+CZInstance :: CZInstance(CZWindow & p_pWindowOwner)
+	: m_bRessourceLoaded(false), m_bIsActive(false), m_psfmlDrawable(nullptr),
+	m_WindowOwner(p_pWindowOwner), m_bIsDebug(false)
 {
 	m_pfPos.Zero();
 	m_pfScale.One();
-
-	p_pWindowOwner.AddDrawableInstance(this);
 }
 
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-ZInstance :: ~ZInstance()
+CZInstance :: ~CZInstance()
 {
 }
 
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-void ZInstance::SetActive(bool p_bActive)
+void CZInstance::SetDebug(bool p_bIsDebug)
 {
-	ZInstance::m_bIsActive = p_bActive;
+	m_bIsDebug = p_bIsDebug;
+}
+
+//-----------------------------------------------------------
+//
+//----------------------------------------------------------
+void CZInstance :: SetActive(bool p_bActive)
+{
+	if (!m_bIsDebug)
+	{
+		if (p_bActive)
+		{
+			m_WindowOwner.AddDrawableInstance(this);
+		}
+		else
+		{
+			m_WindowOwner.RemoveDrawableInstance(this);
+		}
+	}
+	m_bIsActive = p_bActive;
 }
 
 
@@ -40,7 +58,7 @@ void ZInstance::SetActive(bool p_bActive)
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-void ZInstance::SetScale(CVector2D<float> p_pfScale)
+void CZInstance :: SetScale(CVector2D<float> p_pfScale)
 {
 	m_pfScale = p_pfScale;
 }

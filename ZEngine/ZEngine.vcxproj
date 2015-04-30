@@ -41,9 +41,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\Lib\</OutDir>
+    <IntDir>$(SolutionDir)\VSProjFiles\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\Lib\</OutDir>
+    <IntDir>$(SolutionDir)\VSProjFiles\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -59,6 +61,9 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalOptions>/ignore:4221 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -80,21 +85,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ZFileHandler.h" />
+    <ClInclude Include="ZFontManager.h" />
+    <ClInclude Include="ZInit.h" />
+    <ClInclude Include="ZMouseHandler.h" />
     <ClInclude Include="ZRenderer.h" />
     <ClInclude Include="ZColor.h" />
     <ClInclude Include="Vector2D.hpp" />
-    <ClInclude Include="ZengineDebug.h" />
-    <ClInclude Include="ZEngineWindow.h" />
+    <ClInclude Include="ZDebug.h" />
+    <ClInclude Include="ZWindow.h" />
     <ClInclude Include="ZInstance.h" />
     <ClInclude Include="ZShape.h" />
+    <ClInclude Include="ZText.h" />
+    <ClInclude Include="ZWindowManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZColor.cpp" />
+    <ClCompile Include="ZFileHandler.cpp" />
+    <ClCompile Include="ZFontManager.cpp" />
+    <ClCompile Include="ZInit.cpp" />
+    <ClCompile Include="ZMouseHandler.cpp" />
     <ClCompile Include="ZRenderer.cpp" />
-    <ClCompile Include="ZengineDebug.cpp" />
-    <ClCompile Include="ZEngineWindow.cpp" />
+    <ClCompile Include="ZDebug.cpp" />
+    <ClCompile Include="ZWindow.cpp" />
     <ClCompile Include="ZInstance.cpp" />
     <ClCompile Include="ZShape.cpp" />
+    <ClCompile Include="ZText.cpp" />
+    <ClCompile Include="ZUtils.h" />
+    <ClCompile Include="ZWindowManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

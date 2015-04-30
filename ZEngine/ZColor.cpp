@@ -2,6 +2,7 @@
 // ZColor.cpp
 //-----------------------------------------------------------
 
+#include <assert.h>
 #include "ZColor.h"
 
 //-----------------------------------------------------------
@@ -18,12 +19,13 @@ ZColor::ZColor()
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-ZColor::ZColor(int p_nHexaColor)
+ZColor :: ZColor(int p_nHexaColor, float p_fAlpha)
 {
-	r = ((p_nHexaColor >> 24) & 0xFF);
-	g = ((p_nHexaColor >> 16) & 0xFF);
-	b = ((p_nHexaColor >> 8) & 0xFF);
-	a = ((p_nHexaColor)& 0xFF);
+	assert(p_fAlpha >= 0.0f && p_fAlpha <= 1.0f);
+	r = ((p_nHexaColor >> 16) & 0xFF);
+	g = ((p_nHexaColor >> 8) & 0xFF);
+	b = (p_nHexaColor & 0xFF);
+	a = (int) 255.0f * p_fAlpha;
 }
 
 //-----------------------------------------------------------
@@ -42,8 +44,7 @@ void ZColor::operator=(const ZColor& p_Color)
 //-----------------------------------------------------------
 void ZColor::operator=(int p_nHexaColor)
 {
-	r = ((p_nHexaColor >> 24) & 0xFF);
-	g = ((p_nHexaColor >> 16) & 0xFF);
-	b = ((p_nHexaColor >> 8) & 0xFF);
-	a = ((p_nHexaColor)& 0xFF);
+	r = ((p_nHexaColor >> 16) & 0xFF);
+	g = ((p_nHexaColor >> 8) & 0xFF);
+	b = (p_nHexaColor & 0xFF);
 }

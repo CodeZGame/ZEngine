@@ -1,0 +1,6 @@
+Before main loop
+----------- ERROR -----------
+Test warning
+-----------------------------
+Exit 
+----- log END ----
