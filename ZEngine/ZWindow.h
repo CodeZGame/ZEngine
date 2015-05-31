@@ -10,6 +10,7 @@
 #include "Vector2D.hpp"
 #include "ZRenderer.h"
 #include "ZWindowManager.h"
+#include "ZMouseHandler.h"
 #include "ZDebug.h"
 
 namespace ZEngine
@@ -18,8 +19,13 @@ namespace ZEngine
 	{
 	protected:
 		sf::RenderWindow m_sfmlWindow;
+
 		CVector2D<int> m_nWindowSize;
 		CVector2D<int> m_nWindowPosition;
+		CZView m_CurrentView;
+
+		bool m_bIsActive;
+
 		bool m_bVerticalSync;
 
 		CZRenderer m_Renderer;
@@ -28,12 +34,17 @@ namespace ZEngine
 		CZWindow();
 		CZWindow(const int p_nWith, const int p_nHeight, const char * p_tWindowName);
 
+		//void Create();
+		
+		void Reset();
+
+		bool ProcessEvents();
+		void ProcessDraw();
+
+		void UseDebugView();
+
 	public:
 		~CZWindow();
-
-		void Create();
-
-		bool Process();
 
 		void AddDrawableInstance(CZInstance * p_pZInstance);
 
@@ -45,6 +56,8 @@ namespace ZEngine
 		CVector2D<int> GetPosition() const;
 		CVector2D<int> GetSize() const;
 		CZRenderer GetRenderer() { return m_Renderer; }
+		CZView & GetCurrentView() { return m_CurrentView; };
+		bool IsActive() const { return m_bIsActive; }
 
 		//Setters
 		void SetTitle(char * p_pTitle);
@@ -54,6 +67,7 @@ namespace ZEngine
 		void SetPosition(CVector2D<int> & p_rPos);
 		void SetVerticalSync(bool p_bSync);
 		void SetMouseVisible(bool p_bMouseVisible);
+		void SetView(const CZView & view);
 		
 		void IsResizable(bool p_bIsResizable);
 		
@@ -62,6 +76,7 @@ namespace ZEngine
 		//Friend zone
 		friend void CZRenderer::Process();
 		friend void CZRenderer::ProcessDrawDebug();
+		friend CVector2Di CZMouseHandler::GetPosition(CZWindow & p_RelativeWindow);
 
 		friend CZWindowManager;
 	};

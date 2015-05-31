@@ -6,6 +6,7 @@
 
 #define ZENGINE_MAX_WINDOW	2
 
+#include "ZView.h"
 
 namespace ZEngine
 {
@@ -27,8 +28,9 @@ namespace ZEngine
 
 		static void InitWindow(unsigned int p_uWindowIndex, const int p_nWith, const int p_nHeight, const char * p_tWindowName = "ZEngine");
 
-		static bool ProcessAllWindows();
+		static bool ProcessAllWindowsEvents();
+		static void ProcessAllWindowsDraw();
 
-		static bool ProcessWindow(unsigned int p_uWindowIndex);
+		//static bool ProcessWindow(unsigned int p_uWindowIndex);
 	};
 }

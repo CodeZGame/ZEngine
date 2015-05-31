@@ -3,10 +3,12 @@
 //----------------------------------------------------------
 
 #include <string>
-#include "SFML\Window\Event.hpp"
+#include <SFML\Window\Event.hpp>
+
+#include "ZAssert.h"
 #include "ZWindow.h"
 #include "ZRenderer.h"
-#include "ZUtils.h"
+#include "ZSFMLConvert.h"
 
 using namespace ZEngine;
 
@@ -17,6 +19,8 @@ using namespace ZEngine;
 //
 //-----------------------------------------------------------
 CZWindow::CZWindow()
+	:	m_bVerticalSync(false),
+		m_bIsActive(false)
 {
 }
 
@@ -25,7 +29,8 @@ CZWindow::CZWindow()
 //-----------------------------------------------------------
 CZWindow::CZWindow(const int p_nWith, const int p_nHeight, const char * p_tWindowName)
 	:	m_nWindowSize(p_nWith, p_nHeight),
-		m_sfmlWindow(sf::VideoMode(p_nWith, p_nHeight), p_tWindowName)
+		m_sfmlWindow(sf::VideoMode(p_nWith, p_nHeight), p_tWindowName),
+		m_bIsActive(true)
 {
 	m_Renderer.SetWindowOwner(this);
 }
@@ -55,19 +60,62 @@ CZWindow :: ~CZWindow()
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-bool CZWindow :: Process()
+void CZWindow :: Reset()
+{
+	m_bIsActive = false;
+	m_bVerticalSync = false;
+	m_nWindowSize = CVector2Di::Zero;
+	m_nWindowPosition = CVector2Di::Zero;
+}
+
+//-----------------------------------------------------------
+//
+//-----------------------------------------------------------
+bool CZWindow :: ProcessEvents()
 {
 	sf::Event event;
 	while (m_sfmlWindow.pollEvent(event))
 	{
-		// "close requested" event: we close the window
-		if (event.type == sf::Event::Closed)
+		switch (event.type)
 		{
-			m_sfmlWindow.close();
-			return false;
+			//Enlarge the view on resize event
+			case sf::Event::Resized:
+			{
+				CZView & currentView = GetCurrentView();
+				currentView.Reset(ZRectf(0.0f, 0.0f, (float) event.size.width, (float) event.size.height));
+				SetView(currentView);
+			}
+			break;
+
+			// "close requested" event: we close the window
+			case sf::Event::Closed:
+			{
+				m_sfmlWindow.close();
+				Reset();
+				return false;
+			}
+
+			//Handle mouse scroll
+			//case sf::Event::MouseWheelScrolled:
+			case sf::Event::MouseWheelMoved:
+			{
+				//Handle only vertical wheel
+				//if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel)
+				{
+					//CZMouseHandler::ms_nDeltaScroll += event.mouseWheelScroll.delta;
+					CZMouseHandler::ms_nDeltaScroll += event.mouseWheel.delta;
+				}
+			}
 		}
 	}
+	return true;
+}
 
+//-----------------------------------------------------------
+//
+//-----------------------------------------------------------
+void CZWindow :: ProcessDraw()
+{
 	// Clear WHITE
 	m_sfmlWindow.clear();
 
@@ -77,7 +125,6 @@ bool CZWindow :: Process()
 	m_Renderer.Process();
 
 	m_sfmlWindow.display();
-	return true;
 }
 
 //-----------------------------------------------------------
@@ -139,7 +186,7 @@ void CZWindow :: RequestFocus()
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-void CZWindow :: SetSize(CVector2D<int> & p_rSize)
+void CZWindow :: SetSize(CVector2Di & p_rSize)
 {
 	m_nWindowSize.x = p_rSize.x;
 	m_nWindowSize.y = p_rSize.y;
@@ -189,4 +236,24 @@ void CZWindow :: SetVerticalSync(bool p_bSync)
 void CZWindow :: SetMouseVisible(bool p_bMouseVisible)
 {
 	m_sfmlWindow.setMouseCursorVisible(p_bMouseVisible);
+}
+
+//-----------------------------------------------------------
+//
+//-----------------------------------------------------------
+void CZWindow :: SetView(const CZView & p_View)
+{
+	m_CurrentView = p_View;
+	m_sfmlWindow.setView(p_View.m_sfmlView);
+}
+
+//-----------------------------------------------------------
+//
+//-----------------------------------------------------------
+void CZWindow :: UseDebugView()
+{
+	sf::View debugView(sf::FloatRect(0.0f, 0.0f, (float)m_sfmlWindow.getSize().x, (float)m_sfmlWindow.getSize().y));
+	m_sfmlWindow.setView(debugView);
+
+	//m_sfmlWindow.setView(_sfmlWindow.getDefaultView());
 }

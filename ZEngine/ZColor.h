@@ -10,6 +10,7 @@ union ZColor
 {
 	ZColor();
 	ZColor(int p_nHexaColor, float p_fAlpha = 1.0f);
+	ZColor(uint8_t p_RedValue, uint8_t p_GreenValue, uint8_t p_BlueValue, float p_fAlpha = 1.0f);
 
 	struct
 	{

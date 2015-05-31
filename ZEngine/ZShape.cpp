@@ -7,7 +7,7 @@
 #include "SFML\Graphics\RectangleShape.hpp"
 #include "SFML\Graphics\ConvexShape.hpp"
 
-#include "ZUtils.h"
+#include "ZSFMLConvert.h"
 #include "ZShape.h"
 
 using namespace ZEngine;
@@ -95,6 +95,7 @@ void CZShape :: Reset()
 	SetActive(true);
 	m_bRessourceLoaded = true;
 
+	m_pfRotationAngle = 0.0f;
 	SetInnerColor(ZColor::White());
 	SetOutterColor(ZColor::White());
 }

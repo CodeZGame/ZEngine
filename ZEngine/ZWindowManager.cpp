@@ -5,6 +5,7 @@
 #include <assert.h>
 #include "ZWindow.h"
 #include "ZWindowManager.h"
+#include "ZSFMLConvert.h"
 
 using namespace ZEngine;
 
@@ -44,8 +45,18 @@ void CZWindowManager :: InitWindow(unsigned int p_uWindowIndex, const int p_nWit
 {
 	assert(p_uWindowIndex >= 0 && p_uWindowIndex < ZENGINE_MAX_WINDOW);
 
-	ms_pWindows[p_uWindowIndex].m_sfmlWindow.create(sf::VideoMode(p_nWith, p_nHeight), p_tWindowName, sf::Style::Close);
+	ms_pWindows[p_uWindowIndex].m_sfmlWindow.create(sf::VideoMode(p_nWith, p_nHeight), p_tWindowName, sf::Style::Default);
 
+	//Set default view
+	sf::View defaultView = ms_pWindows[p_uWindowIndex].m_sfmlWindow.getView();
+	ms_pWindows[p_uWindowIndex].m_CurrentView.Reset(ZRectf(0.0f, 0.0f, (float) p_nWith, (float) p_nHeight));
+	ms_pWindows[p_uWindowIndex].m_CurrentView.SetCenter(SfVectorToZ(defaultView.getCenter()));
+	ms_pWindows[p_uWindowIndex].m_CurrentView.SetSize(SfVectorToZ(defaultView.getSize()));
+	ms_pWindows[p_uWindowIndex].m_CurrentView.Rotate(defaultView.getRotation());
+	ms_pWindows[p_uWindowIndex].m_CurrentView.SetViewport(SfRectToZ(defaultView.getViewport()));
+
+
+	ms_pWindows[p_uWindowIndex].m_bIsActive = true;
 	ms_pWindows[p_uWindowIndex].m_bVerticalSync = false;
 	ms_pWindows[p_uWindowIndex].m_nWindowSize.x = p_nWith;
 	ms_pWindows[p_uWindowIndex].m_nWindowSize.y = p_nHeight;
@@ -62,24 +73,27 @@ void CZWindowManager :: InitWindow(unsigned int p_uWindowIndex, const int p_nWit
 //-----------------------------------------------------------
 //
 //---------------------------------------------------------
-bool CZWindowManager :: ProcessAllWindows()
+bool CZWindowManager :: ProcessAllWindowsEvents()
 {
 	bool bStillActive = false;
 	bool bWindowState;
 
-	for (int i = 0; i < ZENGINE_MAX_WINDOW && i < (int) ms_uNbWindowActive; ++i)
+	for (int i = 0; i < ZENGINE_MAX_WINDOW; ++i)
 	{
-		bWindowState = ms_pWindows[i].Process();
+		if (ms_pWindows[i].IsActive())
+		{
+			bWindowState = ms_pWindows[i].ProcessEvents();
 
-		//Window closed
-		if (bWindowState == false)
-		{
-			--ms_uNbWindowActive;
-		}
-		//Window still "alive"
-		else
-		{
-			bStillActive = true;
+			//Window closed
+			if (bWindowState == false)
+			{
+				--ms_uNbWindowActive;
+			}
+			//Window still "alive"
+			else
+			{
+				bStillActive = true;
+			}
 		}
 	}
 
@@ -89,9 +103,25 @@ bool CZWindowManager :: ProcessAllWindows()
 //-----------------------------------------------------------
 //
 //---------------------------------------------------------
-bool CZWindowManager :: ProcessWindow(unsigned int p_uWindowIndex)
+void CZWindowManager::ProcessAllWindowsDraw()
 {
-	assert(p_uWindowIndex >= 0 && p_uWindowIndex < ZENGINE_MAX_WINDOW);
+	for (int i = 0; i < ZENGINE_MAX_WINDOW; ++i)
+	{
+		if (ms_pWindows[i].IsActive())
+		{
+			ms_pWindows[i].ProcessDraw();
+		}
+	}
 
-	return ms_pWindows[p_uWindowIndex].Process();
+	//CZDebug::Reset();
 }
+
+//-----------------------------------------------------------
+//
+//---------------------------------------------------------
+//bool CZWindowManager :: ProcessWindow(unsigned int p_uWindowIndex)
+//{
+//	assert(p_uWindowIndex >= 0 && p_uWindowIndex < ZENGINE_MAX_WINDOW);
+//
+//	return ms_pWindows[p_uWindowIndex].Process();
+//}

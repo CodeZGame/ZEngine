@@ -42,6 +42,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\Lib\</OutDir>
     <IntDir>$(SolutionDir)\VSProjFiles\$(ProjectName)\$(Configuration)\</IntDir>
+    <IncludePath>D:\Utilisateurs\Z\Work\SFML\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>D:\Utilisateurs\Z\Work\SFML\lib;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\Lib\</OutDir>
@@ -55,7 +57,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\SFML2-2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\tinyxml2-master</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -75,7 +77,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\SFML2-2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\SFML2-2\include;..\..\tinyxml2-master</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -85,14 +88,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ZGeneralOption.h" />
+    <ClInclude Include="ZRect.hpp" />
+    <ClInclude Include="ZAssert.h" />
     <ClInclude Include="ZFileHandler.h" />
     <ClInclude Include="ZFontManager.h" />
-    <ClInclude Include="ZInit.h" />
+    <ClInclude Include="ZKeyboardHandler.h" />
+    <ClInclude Include="ZMathUtils.h" />
+    <ClInclude Include="ZRessourceImage.h" />
     <ClInclude Include="ZMouseHandler.h" />
     <ClInclude Include="ZRenderer.h" />
     <ClInclude Include="ZColor.h" />
     <ClInclude Include="Vector2D.hpp" />
     <ClInclude Include="ZDebug.h" />
+    <ClInclude Include="ZRessourceImageManager.h" />
+    <ClInclude Include="ZSprite.h" />
+    <ClInclude Include="ZStarter.h" />
+    <ClInclude Include="ZTexture.h" />
+    <ClInclude Include="ZTextureManager.h" />
+    <ClInclude Include="ZTiledMap.h" />
+    <ClInclude Include="ZTiledMapLoader.h" />
+    <ClInclude Include="ZTimeManager.h" />
+    <ClInclude Include="ZView.h" />
     <ClInclude Include="ZWindow.h" />
     <ClInclude Include="ZInstance.h" />
     <ClInclude Include="ZShape.h" />
@@ -103,15 +120,26 @@
     <ClCompile Include="ZColor.cpp" />
     <ClCompile Include="ZFileHandler.cpp" />
     <ClCompile Include="ZFontManager.cpp" />
-    <ClCompile Include="ZInit.cpp" />
+    <ClCompile Include="ZGeneralOption.cpp" />
+    <ClCompile Include="ZKeyboardHandler.cpp" />
+    <ClCompile Include="ZRessourceImage.cpp" />
     <ClCompile Include="ZMouseHandler.cpp" />
     <ClCompile Include="ZRenderer.cpp" />
     <ClCompile Include="ZDebug.cpp" />
+    <ClCompile Include="ZRessourceImageManager.cpp" />
+    <ClCompile Include="ZSprite.cpp" />
+    <ClCompile Include="ZStarter.cpp" />
+    <ClCompile Include="ZTexture.cpp" />
+    <ClCompile Include="ZTextureManager.cpp" />
+    <ClCompile Include="ZTiledMap.cpp" />
+    <ClCompile Include="ZTiledMapLoader.cpp" />
+    <ClCompile Include="ZTimeManager.cpp" />
+    <ClCompile Include="ZView.cpp" />
     <ClCompile Include="ZWindow.cpp" />
     <ClCompile Include="ZInstance.cpp" />
     <ClCompile Include="ZShape.cpp" />
     <ClCompile Include="ZText.cpp" />
-    <ClCompile Include="ZUtils.h" />
+    <ClCompile Include="ZSFMLConvert.h" />
     <ClCompile Include="ZWindowManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

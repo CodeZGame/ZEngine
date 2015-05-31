@@ -2,7 +2,7 @@
 // ZRenderer.cpp
 //-----------------------------------------------------------
 
-#include <assert.h>
+#include "ZAssert.h"
 #include "ZRenderer.h"
 #include "ZInstance.h"
 #include "ZWindow.h"
@@ -16,7 +16,7 @@ using namespace ZEngine;
 //
 //-----------------------------------------------------------
 CZRenderer::CZRenderer()
-	: m_uNbInstances(0)
+	:	m_uNbInstances(0)
 {
 }
 
@@ -48,7 +48,7 @@ void CZRenderer::SetWindowOwner(CZWindow * p_pWindowOwner)
 //-----------------------------------------------------------
 void CZRenderer :: AddDrawableInstance(CZInstance * p_pZInstance)
 {
-	assert(m_uNbInstances < MAX_DRAWABLE_INSTANCES && "Max drawable instances is not enough !");
+	ZASSERT(m_uNbInstances < MAX_DRAWABLE_INSTANCES && "Max drawable instances is not enough !");
 	m_pfDrawableInstances.push_back(p_pZInstance);
 	++m_uNbInstances;
 }
@@ -67,18 +67,21 @@ void CZRenderer :: RemoveDrawableInstance(CZInstance * p_pZInstance)
 //-----------------------------------------------------------
 void  CZRenderer :: Process()
 {
-	for (CZInstance * pInstance : m_pfDrawableInstances)
+	ZASSERT(m_pWindowOwner != nullptr && "Cannot draw Instances, no window attached !");
+	if (m_pWindowOwner)
 	{
-		if (pInstance != nullptr && pInstance->m_bIsActive)// && pInstance->m_pDrawable != nullptr)
+		for (CZInstance * pInstance : m_pfDrawableInstances)
 		{
-			assert(pInstance->m_psfmlDrawable != nullptr);
-			m_pWindowOwner->m_sfmlWindow.draw(*(pInstance->m_psfmlDrawable));
+			if (pInstance != nullptr && pInstance->m_bIsActive)// && pInstance->m_pDrawable != nullptr)
+			{
+				ZASSERT(pInstance->m_psfmlDrawable != nullptr);
+				m_pWindowOwner->m_sfmlWindow.draw(*(pInstance->m_psfmlDrawable));
+			}
 		}
+
+		//Draw all debug Instances (Circle / Rect / Text)
+		ProcessDrawDebug();
 	}
-
-	ProcessDrawDebug();
-
-	CZDebug::Reset();
 }
 
 //-----------------------------------------------------------
@@ -95,7 +98,7 @@ void  CZRenderer :: ProcessDrawDebug()
 		pInstance = &CZDebug::ms_DebugRectangleShapes[i];
 		if (pInstance->m_bIsActive)
 		{
-			assert(pInstance->m_psfmlDrawable != nullptr);
+			ZASSERT(pInstance->m_psfmlDrawable != nullptr);
 			m_pWindowOwner->m_sfmlWindow.draw(*(pInstance->m_psfmlDrawable));
 		}
 	}
@@ -106,10 +109,16 @@ void  CZRenderer :: ProcessDrawDebug()
 		pInstance = &CZDebug::ms_DebugCircleShapes[i];
 		if (pInstance->m_bIsActive)
 		{
-			assert(pInstance->m_psfmlDrawable != nullptr);
+			ZASSERT(pInstance->m_psfmlDrawable != nullptr);
 			m_pWindowOwner->m_sfmlWindow.draw(*(pInstance->m_psfmlDrawable));
 		}
 	}
+
+	//Don't change the view for debug TEXT
+	CZView & pCurrentView = m_pWindowOwner->GetCurrentView();
+
+	//Don't apply current view to Debug Text
+	m_pWindowOwner->UseDebugView();
 
 	//Draw debug texts
 	for (i = 0; i < CZDebug::ms_nNbDebugTexts && i < ZENGINE_MAX_DEBUG_TEXTS; ++i)
@@ -117,8 +126,11 @@ void  CZRenderer :: ProcessDrawDebug()
 		pInstance = &CZDebug::ms_DebugTexts[i];
 		if (pInstance->m_bIsActive)
 		{
-			assert(pInstance->m_psfmlDrawable != nullptr);
+			ZASSERT(pInstance->m_psfmlDrawable != nullptr);
 			m_pWindowOwner->m_sfmlWindow.draw(*(pInstance->m_psfmlDrawable));
 		}
 	}
+
+	//Re set view to previous one
+	m_pWindowOwner->SetView(pCurrentView);
 }

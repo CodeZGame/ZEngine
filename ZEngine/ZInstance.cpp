@@ -5,6 +5,7 @@
 #include "ZInstance.h"
 #include "ZRenderer.h"
 #include "ZWindow.h"
+#include "ZSFMLConvert.h"
 
 using namespace ZEngine;
 
@@ -15,8 +16,9 @@ CZInstance :: CZInstance(CZWindow & p_pWindowOwner)
 	: m_bRessourceLoaded(false), m_bIsActive(false), m_psfmlDrawable(nullptr),
 	m_WindowOwner(p_pWindowOwner), m_bIsDebug(false)
 {
-	m_pfPos.Zero();
-	m_pfScale.One();
+	m_pfPos = CVector2Df::Zero;
+	m_pfScale = CVector2Df::One;
+	m_pfRotationAngle = 0.0f;
 }
 
 //-----------------------------------------------------------
@@ -54,11 +56,28 @@ void CZInstance :: SetActive(bool p_bActive)
 }
 
 
-
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
 void CZInstance :: SetScale(CVector2D<float> p_pfScale)
 {
 	m_pfScale = p_pfScale;
+}
+
+//-----------------------------------------------------------
+//
+//----------------------------------------------------------
+void CZInstance :: SetUniformScale(float p_pfScale)
+{
+	m_pfScale.x = p_pfScale;
+	m_pfScale.y = p_pfScale;
+	dynamic_cast<sf::Transformable *>(m_psfmlDrawable)->setScale(ZVectorToSf(m_pfScale));
+}
+
+//-----------------------------------------------------------
+//
+//----------------------------------------------------------
+void CZInstance :: SetRotation(float p_fRotationAngle)
+{
+	m_pfRotationAngle = p_fRotationAngle;
 }

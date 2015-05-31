@@ -25,8 +25,8 @@ public:
 	//Setter
 	void Set(const T p_tX, const T p_tY);
 
-	void Zero();
-	void One();
+	static CVector2D<T> Zero;
+	static CVector2D<T> One;
 
 	//Operator overloading
 	CVector2D<T> operator=(CVector2D<T> p_ptValue);
@@ -40,6 +40,12 @@ public:
 
 	CVector2D<T> operator*(CVector2D<T> p_ptValue);
 	CVector2D<T> operator*(float * p_pfValue);
+
+	bool operator==(CVector2D<T> p_ptValue) const;
+	bool operator==(float * p_pfValue) const;
+
+	bool operator!=(CVector2D<T> p_ptValue) const;
+	bool operator!=(float * p_pfValue) const;
 };
 
 typedef CVector2D<float> CVector2Df;
@@ -67,7 +73,7 @@ inline CVector2D<T> :: ~CVector2D()
 //
 //----------------------------------------------------------
 template<typename T>
-inline void CVector2D<T> ::Set(const T p_tX, const T p_tY)
+inline void CVector2D<T> :: Set(const T p_tX, const T p_tY)
 {
 	this->x = p_tX;
 	this->y = p_tY;
@@ -77,22 +83,37 @@ inline void CVector2D<T> ::Set(const T p_tX, const T p_tY)
 //
 //----------------------------------------------------------
 template<typename T>
-inline void CVector2D<T> ::Zero()
-{
-	this->x = 0;
-	this->y = 0;
-}
+CVector2D<T> CVector2D<T> :: Zero = CVector2D<T>(0.0f, 0.0f);
+
+//-----------------------------------------------------------
+//
+//----------------------------------------------------------
+template<>
+CVector2D<float> CVector2D<float> :: Zero = CVector2D<float>(0.0f, 0.0f);
+
+//-----------------------------------------------------------
+//
+//----------------------------------------------------------
+template<>
+CVector2D<int> CVector2D<int> :: Zero = CVector2D<int>(0, 0);
 
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
 template<typename T>
-inline void CVector2D<T> ::One()
-{
-	this->x = 1;
-	this->y = 1;
-}
+CVector2D<T> CVector2D<T> :: One = CVector2D<T>(1.0f, 1.0f);
 
+//-----------------------------------------------------------
+//
+//----------------------------------------------------------
+template<>
+CVector2D<float> CVector2D<float> :: One = CVector2D<float>(1.0f, 1.0f);
+
+//-----------------------------------------------------------
+//
+//----------------------------------------------------------
+template<>
+CVector2D<int> CVector2D<int> :: One = CVector2D<int>(1, 1);
 
 //-----------------------------------------------------------
 //
@@ -122,8 +143,8 @@ CVector2D<T> CVector2D<T> :: operator=(float * p_pfValue)
 template<typename T>
 CVector2D<T> CVector2D<T> :: operator+(CVector2D<T> p_ptValue)
 {
-	this->x += p_pfValue[0];
-	this->y += p_pfValue[1];
+	this->x += p_ptValue.x;
+	this->y += p_ptValue.y;
 	return *this;
 }
 
@@ -144,8 +165,8 @@ CVector2D<T> CVector2D<T> :: operator+(float * p_pfValue)
 template<typename T>
 CVector2D<T> CVector2D<T> :: operator-(CVector2D<T> p_ptValue)
 {
-	this->x -= p_pfValue[0];
-	this->y -= p_pfValue[1];
+	this->x -= p_ptValue.x;
+	this->y -= p_ptValue.y;
 	return *this;
 }
 
@@ -166,8 +187,8 @@ CVector2D<T> CVector2D<T> :: operator-(float * p_pfValue)
 template<typename T>
 CVector2D<T> CVector2D<T> :: operator*(CVector2D<T> p_ptValue)
 {
-	this->x *= p_pfValue[0];
-	this->y *= p_pfValue[1];
+	this->x *= p_ptValue.x;
+	this->y *= p_ptValue.y;
 	return *this;
 }
 
@@ -182,3 +203,41 @@ CVector2D<T> CVector2D<T> :: operator*(float * p_pfValue)
 	return *this;
 }
 
+//COMPARISON OPERATORS
+
+//-----------------------------------------------------------
+//
+//----------------------------------------------------------
+template<typename T>
+inline bool CVector2D<T> :: operator==(CVector2D<T> p_ptValue) const
+{
+	return (this->x == p_ptValue.x && this->y == p_ptValue.y);
+}
+
+
+//-----------------------------------------------------------
+//
+//----------------------------------------------------------
+template<typename T>
+inline bool CVector2D<T> :: operator==(float * p_pfValue) const
+{
+	return (this->x == p_pfValue[0] && this->y == p_pfValue[1]);
+}
+
+//-----------------------------------------------------------
+//
+//----------------------------------------------------------
+template<typename T>
+inline bool CVector2D<T> :: operator!=(CVector2D<T> p_ptValue) const
+{
+	return (this->x != p_ptValue.x && this->y != p_ptValue.y);
+}
+
+//-----------------------------------------------------------
+//
+//----------------------------------------------------------
+template<typename T>
+inline bool CVector2D<T> :: operator!=(float * p_pfValue) const
+{
+	return (this->x != p_pfValue[0] && this->y != p_pfValue[1]);
+}

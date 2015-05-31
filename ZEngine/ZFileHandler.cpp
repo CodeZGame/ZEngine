@@ -109,7 +109,8 @@ bool CZFileHandler :: Write(const std::string & p_sStr)
 {
 	if (m_Fstream.is_open())
 	{
-		m_Fstream << p_sStr;
+		m_Fstream << p_sStr << std::endl;
+		m_Fstream.flush();
 		return !m_Fstream.bad();
 	}
 	return false;

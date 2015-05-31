@@ -14,6 +14,7 @@
 
 using namespace ZEngine;
 
+#define DEBUG_LOG_FILE_NAME		"Zlog.txt"
 
 //-----------------------------------------------------------
 // Static
@@ -32,7 +33,7 @@ float CZDebug::ms_fCurrentHeight = 0.0f;
 std::vector<int *> CZDebug::ms_pnDebugVars;
 std::vector<float *> CZDebug::ms_pfDebugVars;
 
-CZFileHandler CZDebug::ms_LogFile("log.txt", FileOpenFlag::e_OpenFlag_Write);
+CZFileHandler CZDebug::ms_LogFile(DEBUG_LOG_FILE_NAME, FileOpenFlag::e_OpenFlag_Write);
 
 //-----------------------------------------------------------
 //
@@ -150,7 +151,6 @@ void CZDebug :: DrawRectangle(CVector2Df p_fPos, CVector2Df p_fSize, ZColor p_Co
 //-----------------------------------------------------------
 void CZDebug :: AddText(const char * p_sText, ...)
 {
-
 	assert(ms_nNbDebugTexts < ZENGINE_MAX_DEBUG_TEXTS && "Max debug texts limit reached");
 	
 	ms_DebugTexts[ms_nNbDebugTexts].Reset();
