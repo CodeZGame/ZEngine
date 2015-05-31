@@ -81,8 +81,13 @@ bool CZWindow :: ProcessEvents()
 			//Enlarge the view on resize event
 			case sf::Event::Resized:
 			{
+				//Update window size
+				m_nWindowSize.x = event.size.width;
+				m_nWindowSize.y = event.size.height;
+
+				//Update view so it just show "more" (instead of shrinking/fitting screen)
 				CZView & currentView = GetCurrentView();
-				currentView.Reset(ZRectf(0.0f, 0.0f, (float) event.size.width, (float) event.size.height));
+				currentView.Reset(ZRectf(0.0f, 0.0f, (float)event.size.width, (float)event.size.height));
 				SetView(currentView);
 			}
 			break;
