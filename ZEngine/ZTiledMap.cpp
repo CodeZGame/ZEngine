@@ -3,8 +3,9 @@
 //-----------------------------------------------------------
 
 #include "ZAssert.h"
+#include "ZRessourceImageManager.h"
 #include "ZTiledMap.h"
-#include "ZTiledMapLoader.h"
+#include "CZTiledMapManager.h"
 
 using namespace ZEngine;
 
@@ -26,6 +27,19 @@ CZTiledMap :: ~CZTiledMap()
 		delete ptr;
 	for (auto ptr : m_vDataTilesets)
 		delete ptr;
+}
+
+//-----------------------------------------------------------
+//
+//---------------------------------------------------------
+bool CZTiledMap :: CreateMap()
+{
+	//Load all tileset
+	for (ZDataTileset * pTileSetData : m_vDataTilesets)
+	{
+		ZEngine::CZRessourceImage * img = CZRessourceImageManager::LoadImageRessourceFromPath(pTileSetData->m_sImageSource, "./");
+	}
+	return true;
 }
 
 //-----------------------------------------------------------

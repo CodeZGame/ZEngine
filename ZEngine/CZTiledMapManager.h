@@ -13,12 +13,12 @@
 
 namespace ZEngine
 {
-	class CZTiledMapLoader
+	class CZTiledMapManager
 	{
 	protected:
 		static std::map<std::string, CZTiledMap *> ms_TileMaps;
 
-		CZTiledMapLoader();
+		CZTiledMapManager();
 
 		static bool RetrieveMapInfo(tinyxml2::XMLElement * p_pMapRoot, CZTiledMap * p_pTiledMap);
 		static bool RetrieveTilesetInfo(tinyxml2::XMLElement * p_pTilesetFirstElement, CZTiledMap * p_pTiledMap);
@@ -26,10 +26,15 @@ namespace ZEngine
 		static bool RetrieveLayerInfo(tinyxml2::XMLElement * p_pLayerFirstElement, CZTiledMap * p_pTiledMap);
 
 	public:
-		~CZTiledMapLoader();
+		~CZTiledMapManager();
 
 		static bool ParseMapFromFile(const std::string & p_pMapPath, const std::string & p_pMapName);
 
-		static bool LoadMap(const std::string & p_pMapPath);
+		static CZTiledMap * LoadMap(const std::string & p_pMapPath);
+
+		//Getters
+		static CZTiledMap * GetTiledMap(const std::string & p_pMapPath);
+
+		//Setters
 	};
 }

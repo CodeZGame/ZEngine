@@ -44,7 +44,7 @@ void CZText :: Reset()
 	SetActive(true);
 	SetPosition(CVector2Df(0.0f, 0.0f));
 
-	SetCharacterSize(15);
+	SetCharacterSize(17);
 	SetColor(ZColor::White());
 }
 

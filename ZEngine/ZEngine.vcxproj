@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Tinyformat\tinyformat.h" />
     <ClInclude Include="ZGeneralOption.h" />
     <ClInclude Include="ZRect.hpp" />
     <ClInclude Include="ZAssert.h" />
@@ -107,7 +108,7 @@
     <ClInclude Include="ZTexture.h" />
     <ClInclude Include="ZTextureManager.h" />
     <ClInclude Include="ZTiledMap.h" />
-    <ClInclude Include="ZTiledMapLoader.h" />
+    <ClInclude Include="CZTiledMapManager.h" />
     <ClInclude Include="ZTimeManager.h" />
     <ClInclude Include="ZView.h" />
     <ClInclude Include="ZWindow.h" />
@@ -132,7 +133,7 @@
     <ClCompile Include="ZTexture.cpp" />
     <ClCompile Include="ZTextureManager.cpp" />
     <ClCompile Include="ZTiledMap.cpp" />
-    <ClCompile Include="ZTiledMapLoader.cpp" />
+    <ClCompile Include="CZTiledMapManager.cpp" />
     <ClCompile Include="ZTimeManager.cpp" />
     <ClCompile Include="ZView.cpp" />
     <ClCompile Include="ZWindow.cpp" />

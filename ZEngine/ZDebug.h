@@ -4,15 +4,20 @@
 
 #pragma once
 
+#include <sstream>
+
 #include <SFML\Graphics\CircleShape.hpp>
 #include <SFML\Graphics\RectangleShape.hpp>
 #include <SFML\Graphics\Text.hpp>
+
+#include "Tinyformat/tinyformat.h"
 
 #include "ZWindow.h"
 #include "ZWindowManager.h"
 #include "ZRenderer.h"
 #include "Vector2D.hpp"
 #include "ZFileHandler.h"
+#include "ZText.h"
 #include "ZColor.h"
 
 #define ZENGINE_MAX_DEBUG_SHAPES	256
@@ -22,7 +27,6 @@
 namespace ZEngine
 {
 	class CZShape;
-	class CZText;
 
 	class CZDebug
 	{
@@ -57,24 +61,77 @@ namespace ZEngine
 
 		static void Reset();
 
-		// Draw debug texts
-		static void AddText(const char * p_sText, ...);
-
-		static void AddTextLog(const char * p_sText, ...);
-
 		static void AddVar(const char * p_sText, int * p_pnVar);
-
 		static void AddVar(const char * p_sText, float * p_pfVar);
+
+		// Draw debug texts
+		//-----------------------------------------------------------
+		//
+		//-----------------------------------------------------------
+		template<typename... Args>
+		static void AddText(const char * p_sText, Args... args)
+		{
+			assert(ms_nNbDebugTexts < ZENGINE_MAX_DEBUG_TEXTS && "Max debug texts limit reached");
+
+			ms_DebugTexts[ms_nNbDebugTexts].Reset();
+
+			ms_DebugTexts[ms_nNbDebugTexts].SetText(tfm::format(p_sText, args...));
+
+			ms_DebugTexts[ms_nNbDebugTexts].SetPosition(CVector2Df(0.0f, ms_fCurrentHeight));
+			ms_fCurrentHeight += ms_DebugTexts[ms_nNbDebugTexts].m_psfmlText->getLocalBounds().height * 1.1f;
+			++ms_nNbDebugTexts;
+		}
+
+		//-----------------------------------------------------------
+		//
+		//-----------------------------------------------------------
+		template<typename... Args>
+		static void AddTextLog(const char * p_sText, Args... args)
+		{
+			//For now simply log to file
+			//Will need to log to "second" debug screen
+
+			std::string tmp = tfm::format(p_sText, args...);
+			ms_LogFile.Write(tmp);
+		}
+
+
+
+		//-----------------------------------------------------------
+		//
+		//-----------------------------------------------------------
+		template<typename... Args>
+		static void LogToFile(const char * p_sText, Args... args)
+		{
+			std::string tmp = tfm::format(p_sText, args...);
+			ms_LogFile.Write(tmp);
+		}
+
+		//-----------------------------------------------------------
+		//
+		//-----------------------------------------------------------
+		template<typename... Args>
+		static void LogWarning(const char * p_sText, Args... args)
+		{
+			std::string tmp("Warning: ");
+			tmp.append(tfm::format(p_sText, args...));
+			ms_LogFile.Write(tmp);
+		}
+
+		//-----------------------------------------------------------
+		//
+		//-----------------------------------------------------------
+		template<typename... Args>
+		static void LogError(const char * p_sText, Args... args)
+		{
+			std::string tmp("----------- ERROR -----------\n");
+			tmp.append(tfm::format(p_sText, args...));
+			tmp.append("-----------------------------\n");
+			ms_LogFile.Write(tmp);
+		}
 
 		//Logs to file
 		static void ChangeLogFile(const std::string & p_sFilePath);
-
-		static void LogToFile(const char * p_sText, ...);
-
-		static void LogError(const char * p_sText, ...);
-
-		static void LogWarning(const char * p_sText, ...);
-
 
 		// Friend zone
 		friend void CZRenderer::ProcessDrawDebug();

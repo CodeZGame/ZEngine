@@ -17,7 +17,7 @@
 #include "../ZEngine/ZMouseHandler.h"
 #include "../ZEngine/ZKeyboardHandler.h"
 #include "../ZEngine/ZTimeManager.h"
-#include "../ZEngine/ZTiledMapLoader.h"
+#include "../ZEngine/CZTiledMapManager.h"
 #include "../ZEngine/ZView.h"
 #include "../ZEngine/ZGeneralOption.h"
 
@@ -46,22 +46,28 @@ void Main :: Init()
 	//ZEngine::CZWindowManager::InitWindow(1, 300, 300, "Window 2");
 	//ZEngine::CZWindowManager::GetWindow(0).SetVerticalSync(true);
 
-	ZEngine::CZRessourceImage * img = ZEngine::CZRessourceImageManager::LoadImageRessource("Data/Images/blue_button11.png");
+	//ZEngine::CZRessourceImage * img = ZEngine::CZRessourceImageManager::LoadImageRessource("Data/Images/blue_button11.png");
 
-	ZEngine::CZTexture * pNewtexture = ZEngine::CZTextureManager::CreateTexture(img);
-	pNewtexture->SetSmooth(true);
+	//ZEngine::CZTexture * pNewtexture = ZEngine::CZTextureManager::CreateTexture(img);
+	//pNewtexture->SetSmooth(true);
 
-	ZEngine::CZSprite testSprite(pNewtexture);
-	testSprite.SetPosition(CVector2Df(300.0f, 200.0f));
-	testSprite.SetUniformScale(4.5f);
+	//ZEngine::CZSprite testSprite(pNewtexture);
+	//testSprite.SetPosition(CVector2Df(300.0f, 200.0f));
+	//testSprite.SetUniformScale(4.5f);
 	//testSprite.SetRotation(45);
 
-	//ZEngine::CZTiledMapLoader::ParseMapFromFile("Data/Maps/TestMap.tmx", "TestMap");
-	//ZEngine::CZTiledMapLoader::ParseMapFromFile("Data/Maps/Test2.tmx", "Test2");
+	//TEST TILEMAPS
+	{
+			//Does not handle encoded tiledmap YET
+			//ZEngine::CZTiledMapManager::ParseMapFromFile("Data/Maps/TestMap.tmx", "TestMap");
+			//ZEngine::CZTiledMapManager::ParseMapFromFile("Data/Maps/Test2.tmx", "Test2");
+			//ZEngine::CZTiledMap * testTiledMap = ZEngine::CZTiledMapManager::LoadMap("Test2");
+	}
 
 	ZEngine::CZDebug::AddTextLog("Before main loop\n");
 
-	ZEngine::CZStarter::StartMainLoop(&testSprite);
+	//ZEngine::CZStarter::StartMainLoop(&testSprite);
+	ZEngine::CZStarter::StartMainLoop();
 }
 
 //-----------------------------------------------------------
@@ -69,36 +75,10 @@ void Main :: Init()
 //-----------------------------------------------------------
 bool Main :: Update(void * p_pContext)
 {
-	/*ZEngine::CZShape * circle = ZEngine::CZShape::CreateCircleShape(CVector2Df(10.0f, 10.0f), 5.0f);
-	circle->SetOutterColor(ZColor::White());
-	circle->SetThickness(1.0f);*/
-
-
-	//ZEngine::CZShape * rectangle = ZEngine::CZShape::CreateRectangleShape(CVector2Df(100.0f, 50.0f), CVector2Df(10.0f, 10.0f));
-	//rectangle->SetOutterColor(ZColor::White());
-
-	//ZEngine::CZShape * convex = ZEngine::CZShape::CreateConvexShape(CVector2Df(100.0f, 50.0f));
-	//convex->SetPointCount(3);
-	//convex->SetPoint(0, CVector2Df(10.0f, 20.0f));
-	//convex->SetPoint(1, CVector2Df(20.0f, 50.0f));
-	//convex->SetPoint(2, CVector2Df(30.0f, 60.0f));
-	//convex->SetOutterColor(ZColor::White());
-	//convex->SetInnerColor(ZColor::White());
-
-	//ZEngine::CZText * text = ZEngine::CZText::Create("Hello Wolrd !", "arial");
-	//text->SetPosition(CVector2Df(50.0f, 100.0f));
-
-
-	//ZEngine::CZFileHandler logFile("log.txt", ZEngine::FileOpenFlag::e_OpenFlag_Write);
-	//logFile.Write("Test log");
-
 	static ZEngine::CZView currentView;
 	currentView = ZEngine::CZWindowManager::GetWindow(0).GetCurrentView();
 	static float i = 100.0f;
 	static float lastZoomFactor = 1.0f;
-
-	//ZEngine::CZDebug::LogToFile("fps: %07.2f", 1.0f / ZEngine::CZTimeManager::ms_fDeltaTime);
-	ZEngine::CZDebug::LogToFile("delta: %07.6f", ZEngine::CZTimeManager::ms_fDeltaTime);
 
 	ZEngine::CZDebug::AddText("frame (µs): %1.5f", ZEngine::CZTimeManager::ms_fDeltaTime);
 	ZEngine::CZDebug::AddText("FPS : %07.2f", 1.0f / ZEngine::CZTimeManager::ms_fDeltaTime);

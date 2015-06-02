@@ -12,7 +12,7 @@
 
 namespace ZEngine
 {
-	class CZTiledMapLoader;
+	class CZTiledMapManager;
 
 	enum class ZTiledMapType
 	{
@@ -26,7 +26,7 @@ namespace ZEngine
 
 	class CZTiledMap
 	{
-	public:
+	protected:
 		struct ZDataLayer
 		{
 			std::string m_sLayerName;
@@ -50,7 +50,7 @@ namespace ZEngine
 			int m_nImageHeight;
 		};
 
-		sf::VertexArray m_vVertexArray;
+		std::vector<sf::VertexArray *> m_vVertexArray;
 
 		std::string m_sMapName;
 
@@ -63,6 +63,8 @@ namespace ZEngine
 		std::vector<ZDataTileset *> m_vDataTilesets;
 
 		CZTiledMap();
+
+		bool CreateMap();
 
 		//Setters
 		void SetName(const std::string & p_pMapName);
@@ -80,6 +82,6 @@ namespace ZEngine
 		const std::string & GetName() const { return m_sMapName; }
 
 		//Friend Zone
-		friend class CZTiledMapLoader;
+		friend class CZTiledMapManager;
 	};
 }

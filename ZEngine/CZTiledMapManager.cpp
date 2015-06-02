@@ -5,7 +5,7 @@
 #include "ZAssert.h"
 #include "ZDebug.h"
 #include "ZTiledMap.h"
-#include "ZTiledMapLoader.h"
+#include "CZTiledMapManager.h"
 
 //XML MAP INFO
 #define XML_MAP_ELEMENT_NAME			"map"
@@ -47,26 +47,26 @@ using namespace ZEngine;
 //-----------------------------------------------------------
 //Static
 //---------------------------------------------------------
-std::map<std::string, CZTiledMap *> CZTiledMapLoader::ms_TileMaps;
+std::map<std::string, CZTiledMap *> CZTiledMapManager::ms_TileMaps;
 
 //-----------------------------------------------------------
 //
 //---------------------------------------------------------
-CZTiledMapLoader :: CZTiledMapLoader()
+CZTiledMapManager :: CZTiledMapManager()
 {
 }
 
 //-----------------------------------------------------------
 //
 //---------------------------------------------------------
-CZTiledMapLoader :: ~CZTiledMapLoader()
+CZTiledMapManager :: ~CZTiledMapManager()
 {
 }
 
 //-----------------------------------------------------------
 //
 //---------------------------------------------------------
-bool CZTiledMapLoader :: ParseMapFromFile(const std::string & p_pMapPath, const std::string & p_pMapName)
+bool CZTiledMapManager :: ParseMapFromFile(const std::string & p_pMapPath, const std::string & p_pMapName)
 {
 	tinyxml2::XMLDocument xmlMap;
 
@@ -116,6 +116,8 @@ bool CZTiledMapLoader :: ParseMapFromFile(const std::string & p_pMapPath, const 
 		return false;
 	}
 
+	//No tiledmap with same name has already been parsed
+	ZASSERT(ms_TileMaps.count(p_pMapName) == 0);
 	ms_TileMaps.insert(std::pair<std::string, CZTiledMap *>(p_pMapName, pTiledMap));
 	return true;
 }
@@ -123,7 +125,7 @@ bool CZTiledMapLoader :: ParseMapFromFile(const std::string & p_pMapPath, const 
 //-----------------------------------------------------------
 //
 //---------------------------------------------------------
-bool CZTiledMapLoader :: RetrieveMapInfo(tinyxml2::XMLElement * p_pMapRoot, CZTiledMap * p_pTiledMap)
+bool CZTiledMapManager :: RetrieveMapInfo(tinyxml2::XMLElement * p_pMapRoot, CZTiledMap * p_pTiledMap)
 {
 	const char * sMapOrientation = p_pMapRoot->Attribute(XML_ATTRIBUTE_MAP_ORIENTATION);
 
@@ -169,7 +171,7 @@ bool CZTiledMapLoader :: RetrieveMapInfo(tinyxml2::XMLElement * p_pMapRoot, CZTi
 //-----------------------------------------------------------
 //
 //---------------------------------------------------------
-bool CZTiledMapLoader :: RetrieveTilesetInfo(tinyxml2::XMLElement * p_pTilesetFirstElement, CZTiledMap * p_pTiledMap)
+bool CZTiledMapManager :: RetrieveTilesetInfo(tinyxml2::XMLElement * p_pTilesetFirstElement, CZTiledMap * p_pTiledMap)
 {
 	ZVALIDPOINTER(p_pTilesetFirstElement);
 	ZVALIDPOINTER(p_pTiledMap);
@@ -267,7 +269,7 @@ bool CZTiledMapLoader :: RetrieveTilesetInfo(tinyxml2::XMLElement * p_pTilesetFi
 //-----------------------------------------------------------
 //
 //---------------------------------------------------------
-bool CZTiledMapLoader :: RetrieveLayerInfo(tinyxml2::XMLElement * p_pLayerFirstElement, CZTiledMap * p_pTiledMap)
+bool CZTiledMapManager :: RetrieveLayerInfo(tinyxml2::XMLElement * p_pLayerFirstElement, CZTiledMap * p_pTiledMap)
 {
 	ZVALIDPOINTER(p_pLayerFirstElement);
 	ZVALIDPOINTER(p_pTiledMap);
@@ -332,7 +334,7 @@ bool CZTiledMapLoader :: RetrieveLayerInfo(tinyxml2::XMLElement * p_pLayerFirstE
 //-----------------------------------------------------------
 //
 //---------------------------------------------------------
-bool CZTiledMapLoader::RetrieveData(tinyxml2::XMLElement * p_pDataElement, CZTiledMap::ZDataLayer * p_pDataLayer, int p_nbTiles)
+bool CZTiledMapManager::RetrieveData(tinyxml2::XMLElement * p_pDataElement, CZTiledMap::ZDataLayer * p_pDataLayer, int p_nbTiles)
 {
 	tinyxml2::XMLError eResult;
 
@@ -364,7 +366,24 @@ bool CZTiledMapLoader::RetrieveData(tinyxml2::XMLElement * p_pDataElement, CZTil
 //-----------------------------------------------------------
 //
 //---------------------------------------------------------
-bool CZTiledMapLoader :: LoadMap(const std::string & p_pMapPath)
+CZTiledMap * CZTiledMapManager :: LoadMap(const std::string & p_pMapPath)
 {
-	return true;
+	ZASSERT(ms_TileMaps.count(p_pMapPath));
+
+	//Actually create vertex array
+	//Load all tileset used and handle everything needed for the map to be drawn
+	if (ms_TileMaps[p_pMapPath]->CreateMap())
+	{
+		return ms_TileMaps[p_pMapPath];
+	}
+	return nullptr;
+}
+
+//-----------------------------------------------------------
+//
+//---------------------------------------------------------
+CZTiledMap * CZTiledMapManager :: GetTiledMap(const std::string & p_pMapPath)
+{
+	ZASSERT(ms_TileMaps.count(p_pMapPath));
+	return ms_TileMaps[p_pMapPath];
 }

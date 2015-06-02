@@ -149,40 +149,6 @@ void CZDebug :: DrawRectangle(CVector2Df p_fPos, CVector2Df p_fSize, ZColor p_Co
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-void CZDebug :: AddText(const char * p_sText, ...)
-{
-	assert(ms_nNbDebugTexts < ZENGINE_MAX_DEBUG_TEXTS && "Max debug texts limit reached");
-	
-	ms_DebugTexts[ms_nNbDebugTexts].Reset();
-
-	va_list vList;
-	va_start(vList, p_sText);
-	_vsnprintf_s(ms_pTextBuffer, ZENGINE_TEXT_BUFFER, p_sText, vList);
-	va_end(vList);
-
-	ms_DebugTexts[ms_nNbDebugTexts].SetText(ms_pTextBuffer);
-
-	ms_DebugTexts[ms_nNbDebugTexts].SetPosition(CVector2Df(0.0f, ms_fCurrentHeight));
-	ms_fCurrentHeight += ms_DebugTexts[ms_nNbDebugTexts].m_psfmlText->getLocalBounds().height * 1.1f;
-	++ms_nNbDebugTexts;
-}
-
-//-----------------------------------------------------------
-//
-//-----------------------------------------------------------
-void CZDebug :: AddTextLog(const char * p_sText, ...)
-{
-	va_list vList;
-	va_start(vList, p_sText);
-	_vsnprintf_s(ms_pTextBuffer, ZENGINE_TEXT_BUFFER, p_sText, vList);
-	va_end(vList);
-
-	ms_LogFile.Write(ms_pTextBuffer);
-}
-
-//-----------------------------------------------------------
-//
-//-----------------------------------------------------------
 void CZDebug :: AddVar(const char * p_sText, int * p_pnVar)
 {
 	ms_pnDebugVars.push_back(p_pnVar);
@@ -202,51 +168,4 @@ void CZDebug :: AddVar(const char * p_sText, float * p_pfVar)
 void CZDebug :: ChangeLogFile(const std::string & p_sFilePath)
 {
 
-}
-
-//-----------------------------------------------------------
-//
-//-----------------------------------------------------------
-void CZDebug :: LogToFile(const char * p_sText, ...)
-{
-	va_list vList;
-	va_start(vList, p_sText);
-	vsnprintf_s(ms_pTextBuffer, ZENGINE_TEXT_BUFFER, p_sText, vList);
-	va_end(vList);
-
-	ms_LogFile.Write(ms_pTextBuffer);
-}
-
-//-----------------------------------------------------------
-//
-//-----------------------------------------------------------
-void CZDebug :: LogError(const char * p_sText, ...)
-{
-	char ErrorUpperText[] = "----------- ERROR -----------\n";
-	char ErrorBottomText[] = "-----------------------------\n";
-	
-	va_list vList;
-	va_start(vList, p_sText);
-	vsnprintf_s(ms_pTextBuffer, ZENGINE_TEXT_BUFFER, p_sText, vList);
-	va_end(vList);
-
-	ms_LogFile.Write(ErrorUpperText);
-	ms_LogFile.Write(ms_pTextBuffer);
-	ms_LogFile.Write(ErrorBottomText);
-}
-
-//-----------------------------------------------------------
-//
-//-----------------------------------------------------------
-void CZDebug :: LogWarning(const char * p_sText, ...)
-{
-	char warningText[] = "Warning: ";
-
-	va_list vList;
-	va_start(vList, p_sText);
-	vsnprintf_s(ms_pTextBuffer, ZENGINE_TEXT_BUFFER, p_sText, vList);
-	va_end(vList);
-
-	ms_LogFile.Write(warningText);
-	ms_LogFile.Write(ms_pTextBuffer);
 }

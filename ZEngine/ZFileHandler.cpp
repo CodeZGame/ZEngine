@@ -5,6 +5,8 @@
 #include <assert.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+
+#include "ZDebug.h"
 #include "ZFileHandler.h"
 
 using namespace ZEngine;
@@ -57,7 +59,7 @@ std::fstream::open_mode CZFileHandler :: GetOpenMode(FileOpenFlag p_eOpenFlag)
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-bool CZFileHandler::FileExists(const std::string & p_sFilePath)
+bool CZFileHandler :: FileExists(const std::string & p_sFilePath)
 {
 	struct stat statBuff;
 	int bResult;
