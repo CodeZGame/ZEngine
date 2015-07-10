@@ -6,8 +6,8 @@
 
 #include <SFML/Graphics/View.hpp>
 
-#include "Vector2D.hpp"
-#include "ZRect.hpp"
+#include "Types/Vector2D.hpp"
+#include "Types/ZRect.hpp"
 
 namespace ZEngine
 {

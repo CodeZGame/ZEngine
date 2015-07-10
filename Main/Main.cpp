@@ -4,20 +4,20 @@
 
 #include <tchar.h>
 #include "Main.h"
-#include "../ZEngine/ZRessourceImageManager.h"
-#include "../ZEngine/ZTextureManager.h"
-#include "../ZEngine/ZTexture.h"
-#include "../ZEngine/ZSprite.h"
-#include "../ZEngine/ZShape.h"
-#include "../ZEngine/ZText.h"
-#include "../ZEngine/ZWindowManager.h"
-#include "../ZEngine/ZFontManager.h"
-#include "../ZEngine/ZFileHandler.h"
-#include "../ZEngine/ZDebug.h"
-#include "../ZEngine/ZMouseHandler.h"
-#include "../ZEngine/ZKeyboardHandler.h"
+#include "../ZEngine/Ressources/ZRessourceImageManager.h"
+#include "../ZEngine/Ressources/ZTextureManager.h"
+#include "../ZEngine/Ressources/ZTexture.h"
+#include "../ZEngine/Ressources/ZSprite.h"
+#include "../ZEngine/Ressources/ZShape.h"
+#include "../ZEngine/Texts/ZText.h"
+#include "../ZEngine/Render/ZWindowManager.h"
+#include "../ZEngine/Texts/ZFontManager.h"
+#include "../ZEngine/File/ZFileHandler.h"
+#include "../ZEngine/Debug/ZDebug.h"
+#include "../ZEngine/Input/ZMouseHandler.h"
+#include "../ZEngine/Input/ZKeyboardHandler.h"
 #include "../ZEngine/ZTimeManager.h"
-#include "../ZEngine/CZTiledMapManager.h"
+#include "../ZEngine/TileMap/CZTiledMapManager.h"
 #include "../ZEngine/ZView.h"
 #include "../ZEngine/ZGeneralOption.h"
 
@@ -46,9 +46,9 @@ void Main :: Init()
 	//ZEngine::CZWindowManager::InitWindow(1, 300, 300, "Window 2");
 	//ZEngine::CZWindowManager::GetWindow(0).SetVerticalSync(true);
 
-	//ZEngine::CZRessourceImage * img = ZEngine::CZRessourceImageManager::LoadImageRessource("Data/Images/blue_button11.png");
+	ZEngine::CZRessourceImage * img = ZEngine::CZRessourceImageManager::LoadImageRessource("Data/Images/blue_button11.png");
 
-	//ZEngine::CZTexture * pNewtexture = ZEngine::CZTextureManager::CreateTexture(img);
+	ZEngine::CZTexture * pNewtexture = ZEngine::CZTextureManager::CreateTexture(img);
 	//pNewtexture->SetSmooth(true);
 
 	//ZEngine::CZSprite testSprite(pNewtexture);
@@ -60,13 +60,20 @@ void Main :: Init()
 	{
 			//Does not handle encoded tiledmap YET
 			//ZEngine::CZTiledMapManager::ParseMapFromFile("Data/Maps/TestMap.tmx", "TestMap");
-			//ZEngine::CZTiledMapManager::ParseMapFromFile("Data/Maps/Test2.tmx", "Test2");
-			//ZEngine::CZTiledMap * testTiledMap = ZEngine::CZTiledMapManager::LoadMap("Test2");
+			ZEngine::CZTiledMapManager::ParseMapFromFile("Data/Maps/Test2.tmx", "Test2");
+			ZEngine::CZTiledMap * testTiledMap = ZEngine::CZTiledMapManager::LoadMap("Test2");
 	}
+
+	//TEST lotfs of sprite
+	//for (int i = 0; i < 1600; ++i)
+	//{
+	//	ZEngine::CZSprite * testSprite = new ZEngine::CZSprite(pNewtexture);
+	//	testSprite->Move(CVector2Df((float) (i % 1000) * 1.0f, 1.0f * (float) (i / 100)));
+	//}
 
 	ZEngine::CZDebug::AddTextLog("Before main loop\n");
 
-	//ZEngine::CZStarter::StartMainLoop(&testSprite);
+	//ZEngine::CZStarter::StartMainLoop(&pNewtexture);
 	ZEngine::CZStarter::StartMainLoop();
 }
 
@@ -94,10 +101,10 @@ bool Main :: Update(void * p_pContext)
 	//pSprite->SetPosition(CVector2Df((float)ZEngine::CZMouseHandler::GetPosition().x, (float)ZEngine::CZMouseHandler::GetPosition().y));
 
 	//if (ZEngine::CZMouseHandler::IsButtonFirstPressed(ZEngine::ZMouseButton::e_Mouse_Button_Left))
-	if (ZEngine::CZKeyboardHandler::IsKeyFirstPressed(ZEngine::ZInputKey::e_InputKey_A))
+	/*if (ZEngine::CZKeyboardHandler::IsKeyFirstPressed(ZEngine::ZInputKey::e_InputKey_A))
 	{
-		pSprite->SetActive(!pSprite->IsActive());
-	}
+	pSprite->SetActive(!pSprite->IsActive());
+	}*/
 
 	ZEngine::CZDebug::AddText("Zoom factor: %f", currentView.GetZoomFactor());
 

@@ -7,13 +7,13 @@
 #include <thread>
 
 #include "ZStarter.h"
-#include "ZWindowManager.h"
-#include "ZFontManager.h"
-#include "ZFileHandler.h"
-#include "ZDebug.h"
+#include "Render/ZWindowManager.h"
+#include "Texts/ZFontManager.h"
+#include "File/ZFileHandler.h"
+#include "Debug/ZDebug.h"
 #include "ZTimeManager.h"
-#include "ZMouseHandler.h"
-#include "ZKeyboardHandler.h"
+#include "Input/ZMouseHandler.h"
+#include "Input/ZKeyboardHandler.h"
 #include "ZGeneralOption.h"
 
 #define SLEEP_PRECISION		900

@@ -3,8 +3,8 @@
 //----------------------------------------------------------
 
 #include "ZView.h"
-#include "ZSFMLConvert.h"
-#include "ZDebug.h"
+#include "Types/ZSFMLConvert.h"
+#include "Debug/ZDebug.h"
 
 using namespace ZEngine;
 
