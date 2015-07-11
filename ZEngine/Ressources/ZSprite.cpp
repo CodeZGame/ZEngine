@@ -10,7 +10,7 @@ using namespace ZEngine;
 //
 //----------------------------------------------------------
 CZSprite :: CZSprite(CZWindow & p_pWindowOwner)
-	: CZInstance(p_pWindowOwner)
+	: CZDrawableInstance(p_pWindowOwner)
 {
 	m_psfmlDrawable = &m_sfmlSprite;
 	Reset();
@@ -20,7 +20,7 @@ CZSprite :: CZSprite(CZWindow & p_pWindowOwner)
 //
 //----------------------------------------------------------
 CZSprite :: CZSprite(const CZTexture * p_pTexture, CZWindow & p_pWindowOwner)
-	: CZInstance(p_pWindowOwner)
+	: CZDrawableInstance(p_pWindowOwner)
 {
 	m_psfmlDrawable = &m_sfmlSprite;
 	m_pTexture = p_pTexture;

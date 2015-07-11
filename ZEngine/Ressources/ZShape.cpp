@@ -16,7 +16,7 @@ using namespace ZEngine;
 //
 //----------------------------------------------------------
 CZShape :: CZShape(CZWindow & p_pWindowOwner)
-	: CZInstance(p_pWindowOwner), m_eType(ZShapeType::e_Shape_None)
+	: CZDrawableInstance(p_pWindowOwner), m_eType(ZShapeType::e_Shape_None)
 {
 	m_bRessourceLoaded = true;
 }

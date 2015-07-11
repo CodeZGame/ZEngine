@@ -46,9 +46,9 @@ namespace ZEngine
 	public:
 		~CZWindow();
 
-		void AddDrawableInstance(CZInstance * p_pZInstance);
+		void AddDrawableInstance(CZDrawableInstance * p_pZInstance);
 
-		void RemoveDrawableInstance(CZInstance * p_pZInstance);
+		void RemoveDrawableInstance(CZDrawableInstance * p_pZInstance);
 
 		//Getters
 		bool HasFocus() const;

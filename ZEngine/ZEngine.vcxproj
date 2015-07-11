@@ -89,6 +89,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Tinyformat\tinyformat.h" />
+    <ClInclude Include="Animator\ZAnimator.h" />
     <ClInclude Include="ZGeneralOption.h" />
     <ClInclude Include="Types\ZRect.hpp" />
     <ClInclude Include="Debug\ZAssert.h" />
@@ -112,7 +113,7 @@
     <ClInclude Include="ZTimeManager.h" />
     <ClInclude Include="ZView.h" />
     <ClInclude Include="Render\ZWindow.h" />
-    <ClInclude Include="Ressources\ZInstance.h" />
+    <ClInclude Include="Ressources\ZDrawableInstance.h" />
     <ClInclude Include="Ressources\ZShape.h" />
     <ClInclude Include="Texts\ZText.h" />
     <ClInclude Include="Render\ZWindowManager.h" />
@@ -121,6 +122,7 @@
     <ClCompile Include="Types\ZColor.cpp" />
     <ClCompile Include="File\ZFileHandler.cpp" />
     <ClCompile Include="Texts\ZFontManager.cpp" />
+    <ClCompile Include="Animator\ZAnimator.cpp" />
     <ClCompile Include="ZGeneralOption.cpp" />
     <ClCompile Include="Input\ZKeyboardHandler.cpp" />
     <ClCompile Include="Ressources\ZRessourceImage.cpp" />
@@ -137,7 +139,7 @@
     <ClCompile Include="ZTimeManager.cpp" />
     <ClCompile Include="ZView.cpp" />
     <ClCompile Include="Render\ZWindow.cpp" />
-    <ClCompile Include="Ressources\ZInstance.cpp" />
+    <ClCompile Include="Ressources\ZDrawableInstance.cpp" />
     <ClCompile Include="Ressources\ZShape.cpp" />
     <ClCompile Include="Texts\ZText.cpp" />
     <ClCompile Include="Types\ZSFMLConvert.h" />

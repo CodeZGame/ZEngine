@@ -11,7 +11,7 @@ using namespace ZEngine;
 //
 //----------------------------------------------------------
 CZText :: CZText(const std::string p_sString, CZWindow & p_pWindowOwner)
-	: m_sText(p_sString), CZInstance(p_pWindowOwner)
+	: m_sText(p_sString), CZDrawableInstance(p_pWindowOwner)
 {
 	m_psfmlText = new sf::Text();
 	m_bRessourceLoaded = true;

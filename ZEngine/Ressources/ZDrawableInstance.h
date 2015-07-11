@@ -1,5 +1,5 @@
 //-----------------------------------------------------------
-// ZInstance.h
+// ZDrawableInstance.h
 //----------------------------------------------------------
 
 #pragma once
@@ -13,7 +13,7 @@ namespace ZEngine
 {
 	class CZWindow;
 
-	class CZInstance
+	class CZDrawableInstance
 	{
 	private:
 		bool m_bIsActive;							//Instance active state (if not active, will not be rendered)
@@ -36,8 +36,8 @@ namespace ZEngine
 		virtual void Reset() = 0;
 
 	public:
-		CZInstance(CZWindow & p_pWindowOwner = CZWindowManager::GetWindow(0));
-		~CZInstance();
+		CZDrawableInstance(CZWindow & p_pWindowOwner = CZWindowManager::GetWindow(0));
+		~CZDrawableInstance();
 
 		//Getters
 		bool IsActive() const { return m_bIsActive; }

@@ -135,7 +135,7 @@ void CZWindow :: ProcessDraw()
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-void CZWindow :: AddDrawableInstance(CZInstance * p_pZInstance)
+void CZWindow :: AddDrawableInstance(CZDrawableInstance * p_pZInstance)
 {
 	m_Renderer.AddDrawableInstance(p_pZInstance);
 }
@@ -143,7 +143,7 @@ void CZWindow :: AddDrawableInstance(CZInstance * p_pZInstance)
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-void CZWindow :: RemoveDrawableInstance(CZInstance * p_pZInstance)
+void CZWindow :: RemoveDrawableInstance(CZDrawableInstance * p_pZInstance)
 {
 	m_Renderer.RemoveDrawableInstance(p_pZInstance);
 }

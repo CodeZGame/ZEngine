@@ -6,7 +6,7 @@
 
 #include "../Render/ZWindowManager.h"
 #include "SFML\Graphics\Shape.hpp"
-#include "ZInstance.h"
+#include "ZDrawableInstance.h"
 #include "../Types/Vector2D.hpp"
 #include "../Types/ZColor.h"
 
@@ -24,7 +24,7 @@ namespace ZEngine
 		e_Shape_Nb
 	};
 
-	class CZShape : public CZInstance
+	class CZShape : public CZDrawableInstance
 	{
 	protected:
 		union ShapeInfos

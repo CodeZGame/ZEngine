@@ -4,7 +4,7 @@
 
 #include "../Debug/ZAssert.h"
 #include "ZRenderer.h"
-#include "../Ressources/ZInstance.h"
+#include "../Ressources/ZDrawableInstance.h"
 #include "../Render/ZWindow.h"
 #include "../Debug/ZDebug.h"
 #include "../Ressources/ZShape.h"
@@ -46,7 +46,7 @@ void CZRenderer::SetWindowOwner(CZWindow * p_pWindowOwner)
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-void CZRenderer :: AddDrawableInstance(CZInstance * p_pZInstance)
+void CZRenderer :: AddDrawableInstance(CZDrawableInstance * p_pZInstance)
 {
 	ZASSERT(m_uNbInstances < MAX_DRAWABLE_INSTANCES && "Max drawable instances is not enough !");
 	m_pfDrawableInstances.push_back(p_pZInstance);
@@ -56,7 +56,7 @@ void CZRenderer :: AddDrawableInstance(CZInstance * p_pZInstance)
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-void CZRenderer :: RemoveDrawableInstance(CZInstance * p_pZInstance)
+void CZRenderer :: RemoveDrawableInstance(CZDrawableInstance * p_pZInstance)
 {
 	//m_pfDrawableInstances.erase(std::find(m_pfDrawableInstances.begin, m_pfDrawableInstances.end, p_pZInstance));
 	//--m_uNbInstances;
@@ -70,7 +70,7 @@ void  CZRenderer :: Process()
 	ZASSERT(m_pWindowOwner != nullptr && "Cannot draw Instances, no window attached !");
 	if (m_pWindowOwner)
 	{
-		for (CZInstance * pInstance : m_pfDrawableInstances)
+		for (CZDrawableInstance * pInstance : m_pfDrawableInstances)
 		{
 			if (pInstance != nullptr && pInstance->m_bIsActive)// && pInstance->m_pDrawable != nullptr)
 			{
@@ -90,7 +90,7 @@ void  CZRenderer :: Process()
 void  CZRenderer :: ProcessDrawDebug()
 {
 	int i;
-	CZInstance * pInstance;
+	CZDrawableInstance * pInstance;
 
 	//Draw debug Rectangle shapes
 	for (i = 0; i < CZDebug::ms_nNbDebugRectangleShapes && i < ZENGINE_MAX_DEBUG_SHAPES; ++i)

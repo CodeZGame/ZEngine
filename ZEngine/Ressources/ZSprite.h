@@ -6,13 +6,13 @@
 
 #include <SFML\Graphics\Sprite.hpp>
 
-#include "../Ressources/ZInstance.h"
+#include "../Ressources/ZDrawableInstance.h"
 #include "ZTexture.h"
 #include "../Types/ZColor.h"
 
 namespace ZEngine
 {
-	class CZSprite : public CZInstance
+	class CZSprite : public CZDrawableInstance
 	{
 	protected:
 		sf::Sprite m_sfmlSprite;

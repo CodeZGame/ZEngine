@@ -1,8 +1,8 @@
 //-----------------------------------------------------------
-// ZInstance.h
+// ZDrawableInstance.h
 //----------------------------------------------------------
 
-#include "ZInstance.h"
+#include "ZDrawableInstance.h"
 #include "../Render/ZRenderer.h"
 #include "../Render/ZWindow.h"
 #include "../Types/ZSFMLConvert.h"
@@ -12,7 +12,7 @@ using namespace ZEngine;
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-CZInstance :: CZInstance(CZWindow & p_pWindowOwner)
+CZDrawableInstance :: CZDrawableInstance(CZWindow & p_pWindowOwner)
 	: m_bRessourceLoaded(false), m_bIsActive(false), m_psfmlDrawable(nullptr),
 	m_WindowOwner(p_pWindowOwner), m_bIsDebug(false)
 {
@@ -24,14 +24,14 @@ CZInstance :: CZInstance(CZWindow & p_pWindowOwner)
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-CZInstance :: ~CZInstance()
+CZDrawableInstance :: ~CZDrawableInstance()
 {
 }
 
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-void CZInstance::SetDebug(bool p_bIsDebug)
+void CZDrawableInstance::SetDebug(bool p_bIsDebug)
 {
 	m_bIsDebug = p_bIsDebug;
 }
@@ -39,7 +39,7 @@ void CZInstance::SetDebug(bool p_bIsDebug)
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-void CZInstance :: SetActive(bool p_bActive)
+void CZDrawableInstance :: SetActive(bool p_bActive)
 {
 	if (!m_bIsDebug)
 	{
@@ -59,7 +59,7 @@ void CZInstance :: SetActive(bool p_bActive)
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-void CZInstance :: SetScale(CVector2D<float> p_pfScale)
+void CZDrawableInstance :: SetScale(CVector2D<float> p_pfScale)
 {
 	m_pfScale = p_pfScale;
 }
@@ -67,7 +67,7 @@ void CZInstance :: SetScale(CVector2D<float> p_pfScale)
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-void CZInstance :: SetUniformScale(float p_pfScale)
+void CZDrawableInstance :: SetUniformScale(float p_pfScale)
 {
 	m_pfScale.x = p_pfScale;
 	m_pfScale.y = p_pfScale;
@@ -77,7 +77,7 @@ void CZInstance :: SetUniformScale(float p_pfScale)
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
-void CZInstance :: SetRotation(float p_fRotationAngle)
+void CZDrawableInstance :: SetRotation(float p_fRotationAngle)
 {
 	m_pfRotationAngle = p_fRotationAngle;
 }

@@ -5,7 +5,7 @@
 #pragma once
 
 #include <SFML\Graphics\Text.hpp>
-#include "../Ressources/ZInstance.h"
+#include "../Ressources/ZDrawableInstance.h"
 #include "../Types/ZColor.h"
 #include "../Render/ZWindowManager.h"
 
@@ -13,7 +13,7 @@ namespace ZEngine
 {
 	class CZDebug;
 
-	class CZText : public CZInstance
+	class CZText : public CZDrawableInstance
 	{
 		enum ZTextStyle
 		{
