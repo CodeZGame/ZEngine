@@ -238,6 +238,15 @@ void CZWindow :: SetVerticalSync(bool p_bSync)
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
+void CZWindow :: SetFrameLimit(int p_nFrameLimit)
+{
+	ZASSERT(p_nFrameLimit > 0);
+	m_sfmlWindow.setFramerateLimit(p_nFrameLimit);
+}
+
+//-----------------------------------------------------------
+//
+//-----------------------------------------------------------
 void CZWindow :: SetMouseVisible(bool p_bMouseVisible)
 {
 	m_sfmlWindow.setMouseCursorVisible(p_bMouseVisible);

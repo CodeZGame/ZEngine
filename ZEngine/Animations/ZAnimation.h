@@ -1,14 +1,13 @@
-#pragma once
 //-----------------------------------------------------------
-// ZAnimator.h
+// ZAnimation.h
 //-----------------------------------------------------------
 
 #pragma once
 
-class CAnimator
+class CZAnimation
 {
 public:
-	CAnimator();
-	~CAnimator();
+	CZAnimation();
+	~CZAnimation();
 };
 

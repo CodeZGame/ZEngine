@@ -66,6 +66,7 @@ namespace ZEngine
 		void SetPosition(int p_nPosX, int p_nPosY);
 		void SetPosition(CVector2D<int> & p_rPos);
 		void SetVerticalSync(bool p_bSync);
+		void SetFrameLimit(int p_nFrameLimit);
 		void SetMouseVisible(bool p_bMouseVisible);
 		void SetView(const CZView & view);
 		

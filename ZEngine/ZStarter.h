@@ -14,14 +14,18 @@ namespace ZEngine
 		void LoopSleep(int p_nTimeToSleep);			//Limit CPU usage (in milliseconds)
 
 	protected:
-		virtual bool Update(void * p_pContext) = 0;
-		virtual bool UpdateAfterDraw(void * p_pContext);
+		//Override this method which will be called every frame
+		virtual bool Update(void * p_pContext = nullptr) = 0;
+		virtual bool UpdateAfterDraw(void * p_pContext = nullptr);
 
 	public:
 		CZStarter();
 		~CZStarter();
 
+		//Call this at the beginning so the engine initialize everything needed
 		virtual void InitEngine() final;
-		void StartMainLoop(void * p_pContext = nullptr);
+
+		//Call this to "start the game"
+		virtual void StartMainLoop(void * p_pContext = nullptr);
 	};
 }

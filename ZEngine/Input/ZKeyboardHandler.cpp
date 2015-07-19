@@ -89,3 +89,12 @@ void CZKeyboardHandler :: UpdateKeyboardInput()
 		}
 	}
 }
+
+//-----------------------------------------------------------
+//
+//---------------------------------------------------------
+void CZKeyboardHandler :: UpdateKeyboardInputOnExternalLoop()
+{
+	//For now only necessary to call base method
+	UpdateKeyboardInput();
+}

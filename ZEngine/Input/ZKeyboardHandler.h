@@ -135,6 +135,10 @@ namespace ZEngine
 		static bool IsKeyFirstPressed(ZInputKey p_eKey);
 		static bool IsKeyReleased(ZInputKey p_eKey);
 
+		//ONLY CALL THIS WHEN OVERRIDING THE MAIN LOOP
+		//CALL THIS ON THE MAIN LOOP BEFORE THE GENERAL UPDATE
+		static void UpdateKeyboardInputOnExternalLoop();
+		
 		friend class CZStarter;
 	};
 }

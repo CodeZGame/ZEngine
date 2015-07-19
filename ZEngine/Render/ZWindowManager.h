@@ -26,7 +26,7 @@ namespace ZEngine
 
 		static CZWindow & GetWindow(unsigned int p_uWindowIndex);
 
-		static void InitWindow(unsigned int p_uWindowIndex, const int p_nWith, const int p_nHeight, const char * p_tWindowName = "ZEngine");
+		static CZWindow * InitWindow(unsigned int p_uWindowIndex, const int p_nWith, const int p_nHeight, const char * p_tWindowName = "ZEngine");
 
 		static bool ProcessAllWindowsEvents();
 		static void ProcessAllWindowsDraw();

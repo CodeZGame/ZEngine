@@ -139,3 +139,12 @@ void CZMouseHandler :: SetPosition(CVector2Di p_pfMousePos)
 {
 	sf::Mouse::setPosition(ZVectorToSf(p_pfMousePos));
 }
+
+//-----------------------------------------------------------
+//
+//---------------------------------------------------------
+void CZMouseHandler :: UpdateMouseInputOnExternalLoop()
+{
+	//For now only necessary to call base method
+	UpdateMouseInput();
+}

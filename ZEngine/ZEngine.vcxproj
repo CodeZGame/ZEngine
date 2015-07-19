@@ -89,7 +89,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Tinyformat\tinyformat.h" />
-    <ClInclude Include="Animator\ZAnimator.h" />
+    <ClInclude Include="Animations\ZAnimator.h" />
+    <ClInclude Include="Animations\ZAnimation.h" />
     <ClInclude Include="ZGeneralOption.h" />
     <ClInclude Include="Types\ZRect.hpp" />
     <ClInclude Include="Debug\ZAssert.h" />
@@ -122,7 +123,8 @@
     <ClCompile Include="Types\ZColor.cpp" />
     <ClCompile Include="File\ZFileHandler.cpp" />
     <ClCompile Include="Texts\ZFontManager.cpp" />
-    <ClCompile Include="Animator\ZAnimator.cpp" />
+    <ClCompile Include="Animations\ZAnimator.cpp" />
+    <ClCompile Include="Animations\ZAnimation.cpp" />
     <ClCompile Include="ZGeneralOption.cpp" />
     <ClCompile Include="Input\ZKeyboardHandler.cpp" />
     <ClCompile Include="Ressources\ZRessourceImage.cpp" />

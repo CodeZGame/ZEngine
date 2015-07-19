@@ -1,19 +1,17 @@
 //-----------------------------------------------------------
-// Main.h
+// SampleShape.h
 //-----------------------------------------------------------
 
 #pragma once
 
 #include "../ZEngine/ZStarter.h"
 
-class Main : ZEngine::CZStarter
+class SampleShape : public ZEngine::CZStarter
 {
 public:
-	Main();
-	~Main();
-
 	void Init();
 
+	//Override this
 	bool Update(void * p_pContext) override;
 };
 

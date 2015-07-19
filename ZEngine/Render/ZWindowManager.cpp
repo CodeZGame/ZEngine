@@ -2,9 +2,9 @@
 // ZText.h
 //----------------------------------------------------------
 
-#include <assert.h>
 #include "ZWindow.h"
 #include "ZWindowManager.h"
+#include "../Debug/ZAssert.h"
 #include "../Types/ZSFMLConvert.h"
 
 using namespace ZEngine;
@@ -34,18 +34,22 @@ CZWindowManager::~CZWindowManager()
 //----------------------------------------------------------
 CZWindow & CZWindowManager :: GetWindow(unsigned int p_uWindowIndex)
 {
-	assert(p_uWindowIndex >= 0 && p_uWindowIndex < ZENGINE_MAX_WINDOW);
+	ZASSERT(p_uWindowIndex >= 0 && p_uWindowIndex < ZENGINE_MAX_WINDOW);
 	return CZWindowManager::ms_pWindows[p_uWindowIndex];
 }
 
 //-----------------------------------------------------------
 //
 //---------------------------------------------------------
-void CZWindowManager :: InitWindow(unsigned int p_uWindowIndex, const int p_nWith, const int p_nHeight, const char * p_tWindowName)
+CZWindow * CZWindowManager :: InitWindow(unsigned int p_uWindowIndex, const int p_nWith, const int p_nHeight, const char * p_tWindowName)
 {
-	assert(p_uWindowIndex >= 0 && p_uWindowIndex < ZENGINE_MAX_WINDOW);
+	ZASSERT(p_uWindowIndex >= 0 && p_uWindowIndex < ZENGINE_MAX_WINDOW);
 
-	ms_pWindows[p_uWindowIndex].m_sfmlWindow.create(sf::VideoMode(p_nWith, p_nHeight), p_tWindowName, sf::Style::Default);
+	//Default AA for now
+	sf::ContextSettings settings;
+	settings.antialiasingLevel = 4;
+
+	ms_pWindows[p_uWindowIndex].m_sfmlWindow.create(sf::VideoMode(p_nWith, p_nHeight), p_tWindowName, sf::Style::Default, settings);
 
 	//Set default view
 	sf::View defaultView = ms_pWindows[p_uWindowIndex].m_sfmlWindow.getView();
@@ -68,6 +72,8 @@ void CZWindowManager :: InitWindow(unsigned int p_uWindowIndex, const int p_nWit
 
 	//One More window active
 	++ms_uNbWindowActive;
+
+	return &ms_pWindows[p_uWindowIndex];
 }
 
 //-----------------------------------------------------------
@@ -112,8 +118,6 @@ void CZWindowManager::ProcessAllWindowsDraw()
 			ms_pWindows[i].ProcessDraw();
 		}
 	}
-
-	//CZDebug::Reset();
 }
 
 //-----------------------------------------------------------

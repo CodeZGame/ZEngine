@@ -78,6 +78,8 @@ void CZStarter::InternUpdate(void * p_pContext)
 		if (!bKeepGoing)
 			break;
 
+		CZTimeManager::ResetFrameTime();
+
 		//Process windows draw
 		ZEngine::CZWindowManager::ProcessAllWindowsDraw();
 
@@ -86,7 +88,7 @@ void CZStarter::InternUpdate(void * p_pContext)
 
 		//Limit CPU Usage (in milliseconds)
 		if (!CZGeneralOption::GetNoSleep())
-			LoopSleep(4000);
+			LoopSleep(10000);
 	}
 }
 
@@ -95,7 +97,7 @@ void CZStarter::InternUpdate(void * p_pContext)
 //-----------------------------------------------------------
 bool CZStarter :: LoopUpdate(void * p)
 {
-	float dt = 0.0046f;
+	float dt = 0.0100f;
 
 	bool bKeepGoing = true;
 
@@ -121,7 +123,7 @@ bool CZStarter :: LoopUpdate(void * p)
 		if (!bKeepGoing)
 			break;
 
-		fRealDeltaTime -= dt;
+		fRealDeltaTime -= CZTimeManager::GetRealDeltaTime();
 	}
 	return bKeepGoing;
 }

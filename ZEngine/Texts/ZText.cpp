@@ -122,6 +122,7 @@ CZText * CZText::Create(const std::string p_sText, CZWindow & p_pWindowOwner)
 {
 	CZText * pText = new CZText(p_sText, p_pWindowOwner);
 
+	pText->SetFont(CZFontManager::GetFontByIndex(0));
 	pText->Reset();
 
 	return pText;

@@ -11,10 +11,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="SampleAnimation.cpp" />
+    <ClCompile Include="SampleHelloWorld.cpp" />
+    <ClCompile Include="SampleLoopControl.cpp" />
+    <ClCompile Include="SampleShape.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Main.h" />
+    <ClInclude Include="GameMain.h" />
+    <ClInclude Include="SampleAnimation.h" />
+    <ClInclude Include="SampleHelloWorld.h" />
+    <ClInclude Include="SampleLoopControl.h" />
+    <ClInclude Include="SampleShape.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZEngine\ZEngine.vcxproj">
