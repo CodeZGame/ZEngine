@@ -13,6 +13,7 @@
 #include "../Tinyformat/tinyformat.h"
 
 #include "../Render/ZWindow.h"
+#include "../ZStarter.h"
 #include "../Render/ZWindowManager.h"
 #include "../Render/ZRenderer.h"
 #include "../Types/Vector2D.hpp"
@@ -47,6 +48,8 @@ namespace ZEngine
 
 		static std::vector<int *> ms_pnDebugVars;
 		static std::vector<float *> ms_pfDebugVars;
+
+		static void FreeRessources();
 
 		CZDebug();
 
@@ -135,6 +138,7 @@ namespace ZEngine
 
 		// Friend zone
 		friend void CZRenderer::ProcessDrawDebug();
+		friend void CZStarter::EngineReleaseRessources();
 	};
 
 }

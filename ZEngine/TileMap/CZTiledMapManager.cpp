@@ -95,6 +95,7 @@ bool CZTiledMapManager :: ParseMapFromFile(const std::string & p_pMapPath, const
 	{
 		CZDebug::LogError("Failed to retrieve map info for map: %s", p_pMapPath);
 		delete pTiledMap;
+		pTiledMap = nullptr;
 		return false;
 	}
 
@@ -104,6 +105,7 @@ bool CZTiledMapManager :: ParseMapFromFile(const std::string & p_pMapPath, const
 	{
 		CZDebug::LogError("Failed to retrieve tileset info for map: %s", p_pMapPath);
 		delete pTiledMap;
+		pTiledMap = nullptr;
 		return false;
 	}
 
@@ -113,6 +115,7 @@ bool CZTiledMapManager :: ParseMapFromFile(const std::string & p_pMapPath, const
 	{
 		CZDebug::LogError("Failed to retrieve layer info for map: %s", p_pMapPath);
 		delete pTiledMap;
+		pTiledMap = nullptr;
 		return false;
 	}
 
@@ -184,6 +187,7 @@ bool CZTiledMapManager :: RetrieveTilesetInfo(tinyxml2::XMLElement * p_pTilesetF
 	if (eResult != tinyxml2::XML_SUCCESS)
 	{
 		delete pTilesetInfo;
+		pTilesetInfo = nullptr;
 		return false;
 	}
 
@@ -191,6 +195,7 @@ bool CZTiledMapManager :: RetrieveTilesetInfo(tinyxml2::XMLElement * p_pTilesetF
 	if (eResult != tinyxml2::XML_SUCCESS)
 	{
 		delete pTilesetInfo;
+		pTilesetInfo = nullptr;
 		return false;
 	}
 	pTilesetInfo->m_sTilesetName = sTilesetName;
@@ -203,6 +208,7 @@ bool CZTiledMapManager :: RetrieveTilesetInfo(tinyxml2::XMLElement * p_pTilesetF
 	if (eResult != tinyxml2::XML_SUCCESS)
 	{
 		delete pTilesetInfo;
+		pTilesetInfo = nullptr;
 		return false;
 	}
 
@@ -210,6 +216,7 @@ bool CZTiledMapManager :: RetrieveTilesetInfo(tinyxml2::XMLElement * p_pTilesetF
 	if (eResult != tinyxml2::XML_SUCCESS)
 	{
 		delete pTilesetInfo;
+		pTilesetInfo = nullptr;
 		return false;
 	}
 
@@ -217,6 +224,7 @@ bool CZTiledMapManager :: RetrieveTilesetInfo(tinyxml2::XMLElement * p_pTilesetF
 	if (eResult != tinyxml2::XML_SUCCESS)
 	{
 		delete pTilesetInfo;
+		pTilesetInfo = nullptr;
 		return false;
 	}
 
@@ -225,6 +233,7 @@ bool CZTiledMapManager :: RetrieveTilesetInfo(tinyxml2::XMLElement * p_pTilesetF
 	if (pImageRoot == nullptr)
 	{
 		delete pTilesetInfo;
+		pTilesetInfo = nullptr;
 		return false;
 	}
 
@@ -232,6 +241,7 @@ bool CZTiledMapManager :: RetrieveTilesetInfo(tinyxml2::XMLElement * p_pTilesetF
 	if (eResult != tinyxml2::XML_SUCCESS)
 	{
 		delete pTilesetInfo;
+		pTilesetInfo = nullptr;
 		return false;
 	}
 	pTilesetInfo->m_sImageSource = sTilesetImageSource;
@@ -240,6 +250,7 @@ bool CZTiledMapManager :: RetrieveTilesetInfo(tinyxml2::XMLElement * p_pTilesetF
 	if (eResult != tinyxml2::XML_SUCCESS)
 	{
 		delete pTilesetInfo;
+		pTilesetInfo = nullptr;
 		return false;
 	}
 
@@ -247,6 +258,7 @@ bool CZTiledMapManager :: RetrieveTilesetInfo(tinyxml2::XMLElement * p_pTilesetF
 	if (eResult != tinyxml2::XML_SUCCESS)
 	{
 		delete pTilesetInfo;
+		pTilesetInfo = nullptr;
 		return false;
 	}
 
@@ -259,6 +271,7 @@ bool CZTiledMapManager :: RetrieveTilesetInfo(tinyxml2::XMLElement * p_pTilesetF
 		if (!RetrieveTilesetInfo(pNextTilesetElem, p_pTiledMap))
 		{
 			delete pTilesetInfo;
+			pTilesetInfo = nullptr;
 			return false;
 		}
 	}
@@ -282,6 +295,7 @@ bool CZTiledMapManager :: RetrieveLayerInfo(tinyxml2::XMLElement * p_pLayerFirst
 	if (sLayerName == nullptr)
 	{
 		delete pLayerInfo;
+		pLayerInfo = nullptr;
 		return false;
 	}
 	pLayerInfo->m_sTilesetName = sLayerName;
@@ -290,6 +304,7 @@ bool CZTiledMapManager :: RetrieveLayerInfo(tinyxml2::XMLElement * p_pLayerFirst
 	if (eResult != tinyxml2::XML_SUCCESS)
 	{
 		delete pLayerInfo;
+		pLayerInfo = nullptr;
 		return false;
 	}
 
@@ -297,6 +312,7 @@ bool CZTiledMapManager :: RetrieveLayerInfo(tinyxml2::XMLElement * p_pLayerFirst
 	if (eResult != tinyxml2::XML_SUCCESS)
 	{
 		delete pLayerInfo;
+		pLayerInfo = nullptr;
 		return false;
 	}
 
@@ -305,6 +321,7 @@ bool CZTiledMapManager :: RetrieveLayerInfo(tinyxml2::XMLElement * p_pLayerFirst
 	if (pDataRoot == nullptr)
 	{
 		delete pLayerInfo;
+		pLayerInfo = nullptr;
 		return false;
 	}
 
@@ -313,7 +330,9 @@ bool CZTiledMapManager :: RetrieveLayerInfo(tinyxml2::XMLElement * p_pLayerFirst
 	if (!RetrieveData(pDataRoot, pLayerInfo, pLayerInfo->m_nLayerSize.x * pLayerInfo->m_nLayerSize.y))
 	{
 		delete pLayerInfo->m_pData;
+		pLayerInfo->m_pData = nullptr;
 		delete pLayerInfo;
+		pLayerInfo = nullptr;
 		return false;
 	}
 
@@ -324,7 +343,9 @@ bool CZTiledMapManager :: RetrieveLayerInfo(tinyxml2::XMLElement * p_pLayerFirst
 		if (!RetrieveLayerInfo(pNextLayerElem, p_pTiledMap))
 		{
 			delete pLayerInfo->m_pData;
+			pLayerInfo->m_pData = nullptr;
 			delete pLayerInfo;
+			pLayerInfo = nullptr;
 			return false;
 		}
 	}

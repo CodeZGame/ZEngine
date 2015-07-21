@@ -46,6 +46,7 @@ CZTexture * CZTextureManager :: CreateTexture(const std::string & p_pFilePath)
 		else
 		{
 			delete pNewTexture;
+			pNewTexture = nullptr;
 		}
 	}
 	else
@@ -71,6 +72,7 @@ CZTexture * CZTextureManager :: CreateTexture(const CZRessourceImage * p_pImage)
 	else
 	{
 		delete pNewTexture;
+		pNewTexture = nullptr;
 	}
 	return nullptr;
 }

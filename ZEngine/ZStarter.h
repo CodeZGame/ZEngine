@@ -23,7 +23,11 @@ namespace ZEngine
 		~CZStarter();
 
 		//Call this at the beginning so the engine initialize everything needed
-		virtual void InitEngine() final;
+		void InitEngine();
+
+		//Releases all ressources use by the engine
+		//ONLY CALL AT PROGRAM EXIT
+		void EngineReleaseRessources();
 
 		//Call this to "start the game"
 		virtual void StartMainLoop(void * p_pContext = nullptr);

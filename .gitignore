@@ -12,7 +12,9 @@
 *.opensdf
 *.o
 *.log
+*.txt
 *.tlog
+*.ilk
 *.lastbuildstate
 
 */Build/

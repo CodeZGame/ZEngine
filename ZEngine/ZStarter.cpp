@@ -90,6 +90,8 @@ void CZStarter::InternUpdate(void * p_pContext)
 		if (!CZGeneralOption::GetNoSleep())
 			LoopSleep(10000);
 	}
+
+	EngineReleaseRessources();
 }
 
 //-----------------------------------------------------------
@@ -184,4 +186,10 @@ bool CZStarter :: Update(void * p_pContext)
 bool CZStarter::UpdateAfterDraw(void * p_pContext)
 {
 	return true;
+}
+
+void CZStarter :: EngineReleaseRessources()
+{
+	//Friend with debug
+	CZDebug :: FreeRessources();
 }

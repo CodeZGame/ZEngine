@@ -23,10 +23,16 @@ CZTiledMap :: CZTiledMap()
 //---------------------------------------------------------
 CZTiledMap :: ~CZTiledMap()
 {
-	for (auto ptr : m_vDataLayers)
-		delete ptr;
-	for (auto ptr : m_vDataTilesets)
-		delete ptr;
+	for (auto dataLayer : m_vDataLayers)
+	{
+		delete dataLayer;
+		dataLayer = nullptr;
+	}
+	for (auto dataTileset : m_vDataTilesets)
+	{
+		delete dataTileset;
+		dataTileset = nullptr;
+	}
 }
 
 //-----------------------------------------------------------

@@ -1,5 +1,0 @@
------------ ERROR -----------
-Failed to load image from: 0065F620-----------------------------
-
-Before main loop
-

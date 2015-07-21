@@ -2,6 +2,11 @@
 // Main.cpp
 //-----------------------------------------------------------
 
+//Visual Leak Detector
+#ifdef _DEBUG
+	#include <vld.h>
+#endif
+
 //Samples
 #include "SampleHelloWorld.h"
 #include "SampleAnimation.h"
@@ -17,22 +22,22 @@ int main()
 {
 //------- SAMPLES ----------
 	//SampleHelloWorld sample;
-	//SampleShape sample;
+	SampleShape sample;
 	//SampleAnimation sample;
 	//SampleLoopControl sample;
 
-	//sample.Init();
+	sample.Init();
 
-	//sample.StartMainLoop();
+	sample.StartMainLoop();
 //--------------------------
 
 
 //------- ACTUAL MAIN GAME -------
-	CGameMain gameMain;
+	//CGameMain gameMain;
 
-	gameMain.Init();
+	//gameMain.Init();
 
-	gameMain.StartMainLoop();
+	//gameMain.StartMainLoop();
 //--------------------------------
 
 	return 0;

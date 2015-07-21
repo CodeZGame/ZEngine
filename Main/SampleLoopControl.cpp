@@ -70,6 +70,8 @@ void SampleLoopControl  :: StartMainLoop(void * p_pContext)
 		ZEngine::CZWindowManager::ProcessAllWindowsDraw();
 	}
 
+	//Call this so engine free / release all ressources
+	EngineReleaseRessources();
 }
 
 //-----------------------------------------------------------

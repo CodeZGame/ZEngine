@@ -67,12 +67,6 @@ void CZDebug :: Init()
 		ms_DebugRectangleShapes[i].m_psfmlDrawable = static_cast<sf::Shape *>(ms_DebugRectangleShapes[i].m_psfmlShape);
 	}
 
-	for (i = 0; i < ZENGINE_MAX_DEBUG_SHAPES; ++i)
-	{
-		ms_DebugTexts[i].m_psfmlText = new sf::Text();
-		ms_DebugTexts[i].m_psfmlDrawable = ms_DebugTexts[i].m_psfmlText;
-	}
-
 	Reset();
 }
 
@@ -168,4 +162,17 @@ void CZDebug :: AddVar(const char * p_sText, float * p_pfVar)
 void CZDebug :: ChangeLogFile(const std::string & p_sFilePath)
 {
 
+}
+
+void CZDebug :: FreeRessources()
+{
+	int i;
+
+	for (i = 0; i < ZENGINE_MAX_DEBUG_SHAPES; ++i)
+	{
+		delete ms_DebugCircleShapes[i].m_psfmlShape;
+		ms_DebugCircleShapes[i].m_psfmlShape = nullptr;
+		delete ms_DebugRectangleShapes[i].m_psfmlShape;
+		ms_DebugRectangleShapes[i].m_psfmlShape = nullptr;
+	}
 }

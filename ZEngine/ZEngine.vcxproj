@@ -124,7 +124,9 @@
     <ClCompile Include="File\ZFileHandler.cpp" />
     <ClCompile Include="Texts\ZFontManager.cpp" />
     <ClCompile Include="Animations\ZAnimator.cpp" />
-    <ClCompile Include="Animations\ZAnimation.cpp" />
+    <ClCompile Include="Animations\ZAnimation.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ZGeneralOption.cpp" />
     <ClCompile Include="Input\ZKeyboardHandler.cpp" />
     <ClCompile Include="Ressources\ZRessourceImage.cpp" />

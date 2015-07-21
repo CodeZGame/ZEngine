@@ -30,6 +30,15 @@ CZRessourceImageManager::CZRessourceImageManager()
 //-----------------------------------------------------------
 CZRessourceImageManager::~CZRessourceImageManager()
 {
+	//Free all ressources
+	for (std::pair<std::string, CZRessourceImage*> pairRessource : ms_vpRessourceImage)
+	{
+		if (pairRessource.second != nullptr)
+		{
+			delete pairRessource.second;
+			pairRessource.second = nullptr;
+		}
+	}
 }
 
 //-----------------------------------------------------------
@@ -70,6 +79,7 @@ CZRessourceImage * CZRessourceImageManager :: DoLoadImageRessource(const std::st
 	{
 		CZDebug::LogError("Failed to load image from: %s", &p_pFilePath);
 		delete pNewImage;
+		pNewImage = nullptr;
 		return nullptr;
 	}
 }

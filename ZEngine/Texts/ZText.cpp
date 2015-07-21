@@ -27,6 +27,7 @@ CZText :: CZText(const std::string p_sString, CZWindow & p_pWindowOwner)
 CZText :: ~CZText()
 {
 	delete m_psfmlText;
+	m_psfmlText = nullptr;
 }
 
 //-----------------------------------------------------------

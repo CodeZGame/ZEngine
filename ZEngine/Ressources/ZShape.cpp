@@ -27,6 +27,7 @@ CZShape :: CZShape(CZWindow & p_pWindowOwner)
 CZShape :: ~CZShape()
 {
 	delete m_psfmlShape;
+	m_psfmlShape = nullptr;
 }
 
 //-----------------------------------------------------------
