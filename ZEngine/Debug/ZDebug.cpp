@@ -67,6 +67,14 @@ void CZDebug :: Init()
 		ms_DebugRectangleShapes[i].m_psfmlDrawable = static_cast<sf::Shape *>(ms_DebugRectangleShapes[i].m_psfmlShape);
 	}
 
+	//Init font for debug texts
+	sf::Font * pDebugFont = CZFontManager::GetFontByName("arial");
+	
+	for (i = 0; i < ZENGINE_MAX_DEBUG_TEXTS; ++i)
+	{
+		ms_DebugTexts[i].SetFont(pDebugFont);
+	}
+
 	Reset();
 }
 
@@ -83,13 +91,10 @@ void CZDebug :: Reset()
 		ms_DebugCircleShapes[i].SetActive(false);
 	}
 
-	sf::Font * pDebugFont = CZFontManager::GetFontByName("arial");
-
 	for (i = 0; i < ZENGINE_MAX_DEBUG_TEXTS; ++i)
 	{
 		ms_DebugTexts[i].SetDebug(true);
 		ms_DebugTexts[i].SetActive(false);
-		ms_DebugTexts[i].SetFont(pDebugFont);
 	}
 
 	ms_nNbDebugCircleShapes = 0;

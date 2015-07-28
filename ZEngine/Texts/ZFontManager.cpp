@@ -2,9 +2,10 @@
 // ZFontManager.cpp
 //-----------------------------------------------------------
 
-#include <assert.h>
 #include <algorithm>
 #include "ZFontManager.h"
+
+#include "../Debug/ZAssert.h"
 
 #define FONT_PATH	"../Build/"
 
@@ -33,7 +34,7 @@ CZFontManager :: ~CZFontManager()
 //-----------------------------------------------------------
 bool CZFontManager :: LoadFromFile(const std::string & p_sPath)
 {
-	assert(ms_uNbLoadedFonts < ZENGINE_MAX_FONTS - 1 && "Max font loaded! Increase ZENGINE_MAX_FONTS");
+	ZASSERT(ms_uNbLoadedFonts < ZENGINE_MAX_FONTS - 1 && "Max font loaded! Increase ZENGINE_MAX_FONTS");
 
 	std::string sFontPath(FONT_PATH);
 
@@ -41,12 +42,14 @@ bool CZFontManager :: LoadFromFile(const std::string & p_sPath)
 
 	bool bSuccess = ms_loadedFonts[ms_uNbLoadedFonts].loadFromFile(sFontPath);
 
-	++ms_uNbLoadedFonts;
-
 	if (!bSuccess)
 	{
-		assert(0 && "Could not load font   TODO: Add log");
+		ZASSERT(0 && "Could not load font   TODO: Add log");
 		// Error loading font from file
+	}
+	else
+	{
+		++ms_uNbLoadedFonts;
 	}
 
 	return bSuccess;
@@ -75,7 +78,7 @@ sf::Font * CZFontManager :: GetFontByName(const std::string & p_sFontName)
 		}
 	}
 
-	assert(0 && "Font not loaded");
+	ZASSERT(0 && "Font not loaded");
 	return nullptr;
 }
 
@@ -84,7 +87,7 @@ sf::Font * CZFontManager :: GetFontByName(const std::string & p_sFontName)
 //-----------------------------------------------------------
 sf::Font * CZFontManager :: GetFontByIndex(unsigned int p_uFontIndex)
 {
-	assert(p_uFontIndex < ZENGINE_MAX_FONTS);
+	ZASSERT(p_uFontIndex < ZENGINE_MAX_FONTS);
 
 	return & ms_loadedFonts[p_uFontIndex];
 }

@@ -2,7 +2,6 @@
 // ZStarter.h
 //-----------------------------------------------------------
 
-#include <cassert>
 #include <chrono>
 #include <thread>
 
@@ -15,6 +14,7 @@
 #include "Input/ZMouseHandler.h"
 #include "Input/ZKeyboardHandler.h"
 #include "ZGeneralOption.h"
+#include "Debug/ZAssert.h"
 
 #define SLEEP_PRECISION		900
 #define MIN_THREAD_SLEEP	100
@@ -27,7 +27,7 @@ auto g_timeSleep = 0.0f;
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-CZStarter::CZStarter()
+CZStarter :: CZStarter()
 {
 }
 
@@ -41,16 +41,9 @@ CZStarter :: ~CZStarter()
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-void CZStarter::InitEngine()
+void CZStarter :: InitEngine()
 {
-	if (!CZFileHandler::FileExists("arial.ttf"))
-	{
-		assert(0 && "Missing default font file");
-	}
-	else
-	{
-		ZEngine::CZFontManager::LoadFromFile("arial.ttf");
-	}
+	ZEngine::CZFontManager::LoadFromFile("arial.ttf");
 
 	CZDebug::Init();
 }
@@ -58,7 +51,7 @@ void CZStarter::InitEngine()
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-void CZStarter::StartMainLoop(void * p_pContext)
+void CZStarter :: StartMainLoop(void * p_pContext)
 {
 	InternUpdate(p_pContext);
 }
@@ -66,7 +59,7 @@ void CZStarter::StartMainLoop(void * p_pContext)
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-void CZStarter::InternUpdate(void * p_pContext)
+void CZStarter :: InternUpdate(void * p_pContext)
 {
 	bool bKeepGoing = true;
 
@@ -133,7 +126,7 @@ bool CZStarter :: LoopUpdate(void * p)
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-void CZStarter::LoopSleep(int p_nTImeToSleep)
+void CZStarter :: LoopSleep(int p_nTImeToSleep)
 {
 	//Time the thread will sleep (the thread will never sleep this exact time !)
 	auto wantedSleep = std::chrono::microseconds(p_nTImeToSleep);
@@ -183,7 +176,7 @@ bool CZStarter :: Update(void * p_pContext)
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-bool CZStarter::UpdateAfterDraw(void * p_pContext)
+bool CZStarter :: UpdateAfterDraw(void * p_pContext)
 {
 	return true;
 }

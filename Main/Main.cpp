@@ -2,9 +2,11 @@
 // Main.cpp
 //-----------------------------------------------------------
 
+//#define LEAK_DETECT
+
 //Visual Leak Detector
-#ifdef _DEBUG
-	#include <vld.h>
+#if defined _DEBUG && defined LEAK_DETECT
+#include <vld.h>
 #endif
 
 //Samples
