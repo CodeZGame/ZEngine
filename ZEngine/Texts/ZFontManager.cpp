@@ -6,6 +6,7 @@
 #include "ZFontManager.h"
 
 #include "../Debug/ZAssert.h"
+#include "../Debug/ZDebug.h"
 
 #define FONT_PATH	"../Build/"
 
@@ -45,7 +46,7 @@ bool CZFontManager :: LoadFromFile(const std::string & p_sPath)
 	if (!bSuccess)
 	{
 		ZASSERT(0 && "Could not load font   TODO: Add log");
-		// Error loading font from file
+		CZDebug::LogWarning("Could not load font %s", p_sPath);
 	}
 	else
 	{

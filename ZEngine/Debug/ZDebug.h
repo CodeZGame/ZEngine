@@ -4,13 +4,18 @@
 
 #pragma once
 
+//Must be included before windows.h
+#include "../Tinyformat/tinyformat.h"
+
+#if defined _WIN32 || defined _WIN64
+#include <windows.h>
+#endif
+
 #include <sstream>
 
 #include <SFML\Graphics\CircleShape.hpp>
 #include <SFML\Graphics\RectangleShape.hpp>
 #include <SFML\Graphics\Text.hpp>
-
-#include "../Tinyformat/tinyformat.h"
 
 #include "../Render/ZWindow.h"
 #include "../ZStarter.h"
@@ -119,6 +124,11 @@ namespace ZEngine
 			std::string tmp("Warning: ");
 			tmp.append(tfm::format(p_sText, args...));
 			ms_LogFile.Write(tmp);
+
+#if defined _WIN32 || defined _WIN64
+			std::wstring sTemp = std::wstring(tmp.begin(), tmp.end());
+			OutputDebugString(sTemp.c_str());
+#endif
 		}
 
 		//-----------------------------------------------------------
@@ -131,6 +141,11 @@ namespace ZEngine
 			tmp.append(tfm::format(p_sText, args...));
 			tmp.append("-----------------------------\n");
 			ms_LogFile.Write(tmp);
+
+#if defined _WIN32 || defined _WIN64
+			std::wstring sTemp = std::wstring(tmp.begin(), tmp.end());
+			OutputDebugString(sTemp.c_str());
+#endif
 		}
 
 		//Logs to file

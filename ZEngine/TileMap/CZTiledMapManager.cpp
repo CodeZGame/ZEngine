@@ -2,10 +2,10 @@
 // ZTiledMapLoader.cpp
 //-----------------------------------------------------------
 
+#include "CZTiledMapManager.h"
 #include "../Debug/ZAssert.h"
 #include "../Debug/ZDebug.h"
 #include "ZTiledMap.h"
-#include "CZTiledMapManager.h"
 
 //XML MAP INFO
 #define XML_MAP_ELEMENT_NAME			"map"

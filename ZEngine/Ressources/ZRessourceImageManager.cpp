@@ -55,6 +55,12 @@ CZRessourceImage * CZRessourceImageManager :: TryLoadFromAllDataPaths(const std:
 		if (pImage != nullptr)
 			break;
 	}
+
+	if (pImage == nullptr)
+	{
+		ZASSERT(0);
+		CZDebug::LogError("Failed to load image: %s", p_pFileName);
+	}
 	return pImage;
 }
 
@@ -65,7 +71,7 @@ CZRessourceImage * CZRessourceImageManager :: DoLoadImageRessource(const std::st
 {
 	CZRessourceImage * pNewImage = new CZRessourceImage();
 
-	ZMEMORYASSERT(pNewImage);
+	ZMEMORYASSERT(pNewImage != nullptr);
 
 	bool bRes = pNewImage->m_sfmlImage.loadFromFile(p_pFilePath);
 
@@ -105,7 +111,7 @@ CZRessourceImage * CZRessourceImageManager :: LoadImageRessource(const std::stri
 //-----------------------------------------------------------
 CZRessourceImage * CZRessourceImageManager :: LoadImageRessource(const std::string & p_pFilePath, CZRessourceImage * p_pRessourceImage)
 {
-	ZVALIDPOINTER(p_pRessourceImage);
+	ZVALIDPOINTER(p_pRessourceImage != nullptr);
 
 	bool bRes = p_pRessourceImage->m_sfmlImage.loadFromFile(p_pFilePath);
 
