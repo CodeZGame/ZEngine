@@ -5,9 +5,11 @@
 #pragma once
 
 #include <string>
-#include "SFML\Graphics\RenderWindow.hpp"
-#include "SFML\System\Vector2.hpp"
+#include <SFML\Graphics\RenderWindow.hpp>
+#include <SFML\System\Vector2.hpp>
+
 #include "../Types/Vector2D.hpp"
+#include "ZRenderComponent.h"
 #include "ZRenderer.h"
 #include "ZWindowManager.h"
 #include "../Input/ZMouseHandler.h"
@@ -47,8 +49,10 @@ namespace ZEngine
 		~CZWindow();
 
 		void AddDrawableInstance(CZDrawableInstance * p_pZInstance);
+		void AddDrawableInstance(CZRenderComponent * p_pZRenderInstance);
 
 		void RemoveDrawableInstance(CZDrawableInstance * p_pZInstance);
+		void RemoveDrawableInstance(CZRenderComponent * p_pZRenderInstance);
 
 		//Getters
 		bool HasFocus() const;

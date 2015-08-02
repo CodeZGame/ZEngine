@@ -143,9 +143,25 @@ void CZWindow :: AddDrawableInstance(CZDrawableInstance * p_pZInstance)
 //-----------------------------------------------------------
 //
 //----------------------------------------------------------
+void CZWindow::AddDrawableInstance(CZRenderComponent * p_pZRenderInstance)
+{
+	m_Renderer.AddDrawableInstance(p_pZRenderInstance);
+}
+
+//-----------------------------------------------------------
+//
+//----------------------------------------------------------
 void CZWindow :: RemoveDrawableInstance(CZDrawableInstance * p_pZInstance)
 {
 	m_Renderer.RemoveDrawableInstance(p_pZInstance);
+}
+
+//-----------------------------------------------------------
+//
+//----------------------------------------------------------
+void CZWindow :: RemoveDrawableInstance(CZRenderComponent * p_pZRenderInstance)
+{
+	m_Renderer.RemoveDrawableInstance(p_pZRenderInstance);
 }
 
 //-----------------------------------------------------------

@@ -2,7 +2,7 @@
 // ZShape.cpp
 //----------------------------------------------------------
 
-#include <assert.h>
+#include "../Debug/ZAssert.h"
 #include "SFML\Graphics\CircleShape.hpp"
 #include "SFML\Graphics\RectangleShape.hpp"
 #include "SFML\Graphics\ConvexShape.hpp"
@@ -114,7 +114,7 @@ void CZShape :: SetShapeType(ZShapeType p_eType)
 //----------------------------------------------------------
 void CZShape :: SetShapeInfo(float p_nRadius)
 {
-	assert(m_eType == ZShapeType::e_Shape_Circle);
+	ZASSERT(m_eType == ZShapeType::e_Shape_Circle);
 	m_ShapeInfo.m_nRadius = p_nRadius;
 	((sf::CircleShape*) m_psfmlShape)->setRadius(p_nRadius);
 }
@@ -124,7 +124,7 @@ void CZShape :: SetShapeInfo(float p_nRadius)
 //----------------------------------------------------------
 void CZShape :: SetShapeInfo(CVector2Df p_pfSize)
 {
-	assert(m_eType == ZShapeType::e_Shape_Rectangle);
+	ZASSERT(m_eType == ZShapeType::e_Shape_Rectangle);
 	m_ShapeInfo.m_pfSize = p_pfSize;
 	((sf::RectangleShape*) m_psfmlShape)->setSize(ZVectorToSf(p_pfSize));
 }

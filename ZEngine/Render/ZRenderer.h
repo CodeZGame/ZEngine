@@ -11,6 +11,7 @@
 
 namespace ZEngine
 {
+	class CZRenderComponent;
 	class CZDrawableInstance;
 	class CZWindow;
 
@@ -19,6 +20,7 @@ namespace ZEngine
 	private:
 		CZWindow * m_pWindowOwner;
 		std::vector<CZDrawableInstance *> m_pfDrawableInstances;
+		std::vector<CZRenderComponent *> m_pfRenderInstances;
 		unsigned int m_uNbInstances;
 
 	public:
@@ -33,7 +35,9 @@ namespace ZEngine
 		void ProcessDrawDebug();
 
 		void AddDrawableInstance(CZDrawableInstance * p_pZInstance);
+		void AddDrawableInstance(CZRenderComponent * p_pZRenderInstance);
 
 		void RemoveDrawableInstance(CZDrawableInstance * p_pZInstance);
+		void RemoveDrawableInstance(CZRenderComponent * p_pZRenderInstance);
 	};
 }

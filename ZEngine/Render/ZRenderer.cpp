@@ -56,9 +56,28 @@ void CZRenderer :: AddDrawableInstance(CZDrawableInstance * p_pZInstance)
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
+void CZRenderer :: AddDrawableInstance(CZRenderComponent * p_pZRenderInstance)
+{
+	ZASSERT(m_uNbInstances < MAX_DRAWABLE_INSTANCES && "Max drawable instances is not enough !");
+	m_pfRenderInstances.push_back(p_pZRenderInstance);
+	++m_uNbInstances;
+}
+
+//-----------------------------------------------------------
+//
+//-----------------------------------------------------------
 void CZRenderer :: RemoveDrawableInstance(CZDrawableInstance * p_pZInstance)
 {
 	//m_pfDrawableInstances.erase(std::find(m_pfDrawableInstances.begin, m_pfDrawableInstances.end, p_pZInstance));
+	//--m_uNbInstances;
+}
+
+//-----------------------------------------------------------
+//
+//-----------------------------------------------------------
+void CZRenderer::RemoveDrawableInstance(CZRenderComponent * p_pZRenderInstance)
+{
+	//m_pfRenderInstances.erase(std::find(m_pfRenderInstances.begin, m_pfRenderInstances.end, p_pZRenderInstance));
 	//--m_uNbInstances;
 }
 
@@ -70,12 +89,15 @@ void  CZRenderer :: Process()
 	ZASSERT(m_pWindowOwner != nullptr && "Cannot draw Instances, no window attached !");
 	if (m_pWindowOwner)
 	{
-		for (CZDrawableInstance * pInstance : m_pfDrawableInstances)
+		//for (CZDrawableInstance * pInstance : m_pfDrawableInstances)
+		for (CZRenderComponent * pInstance : m_pfRenderInstances)
 		{
-			if (pInstance != nullptr && pInstance->m_bIsActive)// && pInstance->m_pDrawable != nullptr)
+			if (pInstance != nullptr && pInstance->GetActive())
 			{
-				ZASSERT(pInstance->m_psfmlDrawable != nullptr);
-				m_pWindowOwner->m_sfmlWindow.draw(*(pInstance->m_psfmlDrawable));
+				//Get latest position from transform
+				pInstance->UpdatePosition();
+
+				m_pWindowOwner->m_sfmlWindow.draw((pInstance->m_pSfmlDrawable));		//Friend
 			}
 		}
 

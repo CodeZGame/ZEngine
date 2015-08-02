@@ -45,7 +45,7 @@ bool CZFontManager :: LoadFromFile(const std::string & p_sPath)
 
 	if (!bSuccess)
 	{
-		ZASSERT(0 && "Could not load font   TODO: Add log");
+		ZASSERT(0 && "Could not load font");
 		CZDebug::LogWarning("Could not load font %s", p_sPath);
 	}
 	else

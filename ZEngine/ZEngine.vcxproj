@@ -88,9 +88,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Render\ZConvexShapeRenderComponent.h" />
+    <ClInclude Include="Render\ZRectangleShapeRenderComponent.h" />
     <ClInclude Include="Tinyformat\tinyformat.h" />
     <ClInclude Include="Animations\ZAnimator.h" />
     <ClInclude Include="Animations\ZAnimation.h" />
+    <ClInclude Include="Actors\ZActor.h" />
+    <ClInclude Include="Actors\ZBaseComponent.h" />
+    <ClInclude Include="Debug\ZDebugShapeActor.h" />
     <ClInclude Include="ZGeneralOption.h" />
     <ClInclude Include="Types\ZRect.hpp" />
     <ClInclude Include="Debug\ZAssert.h" />
@@ -106,12 +111,15 @@
     <ClInclude Include="Debug\ZDebug.h" />
     <ClInclude Include="Ressources\ZRessourceImageManager.h" />
     <ClInclude Include="Ressources\ZSprite.h" />
+    <ClInclude Include="Render\ZRenderComponent.h" />
+    <ClInclude Include="Render\ZCircleShapeRenderComponent.h" />
     <ClInclude Include="ZStarter.h" />
     <ClInclude Include="Ressources\ZTexture.h" />
     <ClInclude Include="Ressources\ZTextureManager.h" />
     <ClInclude Include="TileMap\ZTiledMap.h" />
     <ClInclude Include="TileMap\CZTiledMapManager.h" />
     <ClInclude Include="ZTimeManager.h" />
+    <ClInclude Include="Actors\ZTransformComponent.h" />
     <ClInclude Include="ZView.h" />
     <ClInclude Include="Render\ZWindow.h" />
     <ClInclude Include="Ressources\ZDrawableInstance.h" />
@@ -120,6 +128,8 @@
     <ClInclude Include="Render\ZWindowManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Render\ZConvexShapeRenderComponent.cpp" />
+    <ClCompile Include="Render\ZRectangleShapeRenderComponent.cpp" />
     <ClCompile Include="Types\ZColor.cpp" />
     <ClCompile Include="File\ZFileHandler.cpp" />
     <ClCompile Include="Texts\ZFontManager.cpp" />
@@ -127,6 +137,9 @@
     <ClCompile Include="Animations\ZAnimation.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Actors\ZActor.cpp" />
+    <ClCompile Include="Actors\ZBaseComponent.cpp" />
+    <ClCompile Include="Debug\ZDebugShapeActor.cpp" />
     <ClCompile Include="ZGeneralOption.cpp" />
     <ClCompile Include="Input\ZKeyboardHandler.cpp" />
     <ClCompile Include="Ressources\ZRessourceImage.cpp" />
@@ -135,12 +148,15 @@
     <ClCompile Include="Debug\ZDebug.cpp" />
     <ClCompile Include="Ressources\ZRessourceImageManager.cpp" />
     <ClCompile Include="Ressources\ZSprite.cpp" />
+    <ClCompile Include="Render\ZRenderComponent.cpp" />
+    <ClCompile Include="Render\ZCircleShapeRenderComponent.cpp" />
     <ClCompile Include="ZStarter.cpp" />
     <ClCompile Include="Ressources\ZTexture.cpp" />
     <ClCompile Include="Ressources\ZTextureManager.cpp" />
     <ClCompile Include="TileMap\ZTiledMap.cpp" />
     <ClCompile Include="TileMap\CZTiledMapManager.cpp" />
     <ClCompile Include="ZTimeManager.cpp" />
+    <ClCompile Include="Actors\ZTransformComponent.cpp" />
     <ClCompile Include="ZView.cpp" />
     <ClCompile Include="Render\ZWindow.cpp" />
     <ClCompile Include="Ressources\ZDrawableInstance.cpp" />

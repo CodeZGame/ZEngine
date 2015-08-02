@@ -15,6 +15,7 @@
 #include "Input/ZKeyboardHandler.h"
 #include "ZGeneralOption.h"
 #include "Debug/ZAssert.h"
+#include "Actors/ZActor.h"
 
 #define SLEEP_PRECISION		900
 #define MIN_THREAD_SLEEP	100
@@ -44,6 +45,8 @@ CZStarter :: ~CZStarter()
 void CZStarter :: InitEngine()
 {
 	ZEngine::CZFontManager::LoadFromFile("arial.ttf");
+
+	CZActor::InitActors();		//Friend
 
 	CZDebug::Init();
 }
@@ -183,6 +186,5 @@ bool CZStarter :: UpdateAfterDraw(void * p_pContext)
 
 void CZStarter :: EngineReleaseRessources()
 {
-	//Friend with debug
-	CZDebug :: FreeRessources();
+	CZDebug :: FreeRessources();		//Friend
 }
