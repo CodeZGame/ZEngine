@@ -3,6 +3,7 @@
 //-----------------------------------------------------------
 
 #include "ZCircleShapeRenderComponent.h"
+#include "../Types/ZColor.h"
 #include "../Types/ZSFMLConvert.h"
 
 using namespace ZEngine;
@@ -14,6 +15,8 @@ CZCircleShapeRenderComponent :: CZCircleShapeRenderComponent(CZActor & p_pOwner,
 	:	CZRenderComponent(p_pOwner, m_sfmlCircleShape, p_pWindowOwner)
 {
 	SetRadius(p_nRadius);
+	SetInnerColor(ZColor::White());
+	SetOutterColor(ZColor::White());
 }
 
 //-----------------------------------------------------------
@@ -66,12 +69,4 @@ void CZCircleShapeRenderComponent :: SetNbPoints(unsigned int p_nNbPoints)
 {
 	m_nNbPoints = p_nNbPoints;
 	m_sfmlCircleShape.setPointCount(m_nNbPoints);
-}
-
-//-----------------------------------------------------------
-//
-//---------------------------------------------------------
-void CZCircleShapeRenderComponent :: UpdatePosition()
-{
-	m_sfmlCircleShape.setPosition(ZVectorToSf(m_pOwner.m_Transform.m_position));
 }

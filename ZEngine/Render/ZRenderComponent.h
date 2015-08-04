@@ -20,12 +20,13 @@ namespace ZEngine
 
 		//Update position based on transform component
 		//Will be called by renderer before rendering Actor
-		virtual void UpdatePosition() = 0;
 
 	protected:
 		sf::Drawable &	m_pSfmlDrawable;
 		CZActor	&		m_pOwner;
 		CZWindow &		m_pWindowOwner;
+
+		void			UpdatePosition();
 
 		friend class CZRenderer;
 	};

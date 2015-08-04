@@ -40,5 +40,7 @@ namespace ZEngine
 		static CZDebugShapeActor * CreateCircleShape(const CVector2D<float> &p_pfPos, float p_nRadius = 5.0f, CZWindow & p_pWindowOwner = CZWindowManager::GetWindow(0));
 		static CZDebugShapeActor * CreateRectangleShape(const CVector2D<float> &p_pfPos, const CVector2Df p_pfSize = CVector2Df(10.0f, 10.0f), CZWindow & p_pWindowOwner = CZWindowManager::GetWindow(0));
 		static CZDebugShapeActor * CreateConvexShape(const CVector2D<float> &p_pfPos, CZWindow & p_pWindowOwner = CZWindowManager::GetWindow(0));
+	
+		CZRenderComponent * GetRenderer() const { return m_pRenderComponent; }
 	};
 }

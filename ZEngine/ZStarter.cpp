@@ -101,8 +101,8 @@ bool CZStarter :: LoopUpdate(void * p)
 
 	float fRealDeltaTime = CZTimeManager::GetRealDeltaTime();
 
-	while (fRealDeltaTime >= dt)
-	{
+	//while (fRealDeltaTime >= dt)
+	//{
 		CZDebug::Reset();
 		CZTimeManager::UpdateDeltaTime();
 
@@ -114,15 +114,16 @@ bool CZStarter :: LoopUpdate(void * p)
 		bKeepGoing = ZEngine::CZWindowManager::ProcessAllWindowsEvents();
 
 		if (!bKeepGoing)
-			break;
+			//	break;
+			return bKeepGoing;
 
 		bKeepGoing = Update(p);
 
-		if (!bKeepGoing)
-			break;
+		//if (!bKeepGoing)
+		//	break;
 
 		fRealDeltaTime -= CZTimeManager::GetRealDeltaTime();
-	}
+	//}
 	return bKeepGoing;
 }
 

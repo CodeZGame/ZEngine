@@ -55,6 +55,7 @@ CZDebugShapeActor * CZDebugShapeActor::CreateRectangleShape(const CVector2D<floa
 	pDebugShape->SetRenderComponent(new CZRectangleShapeRenderComponent(*pDebugShape, p_pfSize, p_pWindowOwner));
 
 	pDebugShape->m_eShapeType = ZShapeType::e_Shape_Rectangle;
+	pDebugShape->m_Transform.m_position = p_pfPos;
 	return pDebugShape;
 }
 
@@ -68,5 +69,6 @@ CZDebugShapeActor * CZDebugShapeActor::CreateConvexShape(const CVector2D<float> 
 	pDebugShape->SetRenderComponent(new CZConvexShapeRenderComponent(*pDebugShape, p_pWindowOwner));
 
 	pDebugShape->m_eShapeType = ZShapeType::e_Shape_Rectangle;
+	pDebugShape->m_Transform.m_position = p_pfPos;
 	return pDebugShape;
 }

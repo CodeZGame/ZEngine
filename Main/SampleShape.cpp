@@ -15,6 +15,7 @@
 #include "../ZEngine/Types/ZColor.h"
 
 #include "../ZEngine/Debug/ZDebugShapeActor.h"
+#include "../ZEngine/Render/ZConvexShapeRenderComponent.h"
 
 //Project includes
 #include "SampleShape.h"
@@ -50,7 +51,16 @@ void SampleShape :: Init()
 	//pConvex->SetPoint(2, CVector2Df(100.0f, 0.0f));
 	//pConvex->SetPoint(3, CVector2Df(30.0f, -20.0f));
 
-	ZEngine::CZDebugShapeActor * pCircleShape = ZEngine::CZDebugShapeActor::CreateCircleShape(CVector2Df(10.0f, 10.0f), 25.0f);
+	ZEngine::CZDebugShapeActor * pCircleShape = ZEngine::CZDebugShapeActor::CreateCircleShape(CVector2Df(100.0f, 100.0f), 25.0f);
+
+	ZEngine::CZDebugShapeActor * pRectangleShape = ZEngine::CZDebugShapeActor::CreateRectangleShape(CVector2Df(100.0f, 200.0f), CVector2Df(100.0f, 50.0f));
+
+	ZEngine::CZDebugShapeActor * pConvexShape = ZEngine::CZDebugShapeActor::CreateConvexShape(CVector2Df(400.0f, 200.0f));
+	((ZEngine::CZConvexShapeRenderComponent*) pConvexShape->GetRenderer())->SetPointCount(4);
+	((ZEngine::CZConvexShapeRenderComponent*) pConvexShape->GetRenderer())->SetPoint(0, CVector2Df(0.0f, 0.0f));
+	((ZEngine::CZConvexShapeRenderComponent*) pConvexShape->GetRenderer())->SetPoint(1, CVector2Df(30.0f, 20.0f));
+	((ZEngine::CZConvexShapeRenderComponent*) pConvexShape->GetRenderer())->SetPoint(2, CVector2Df(100.0f, 0.0f));
+	((ZEngine::CZConvexShapeRenderComponent*) pConvexShape->GetRenderer())->SetPoint(3, CVector2Df(30.0f, -20.0f));
 
 	//Initialize one window (you can have more if you want)
 	ZEngine::CZWindowManager::InitWindow(0, 800, 600, "Sample Shape");

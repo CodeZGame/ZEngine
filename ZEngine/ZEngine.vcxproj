@@ -58,6 +58,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\tinyxml2-master</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -118,6 +119,7 @@
     <ClInclude Include="Ressources\ZTextureManager.h" />
     <ClInclude Include="TileMap\ZTiledMap.h" />
     <ClInclude Include="TileMap\CZTiledMapManager.h" />
+    <ClInclude Include="Render\ZTextRenderComponent.h" />
     <ClInclude Include="ZTimeManager.h" />
     <ClInclude Include="Actors\ZTransformComponent.h" />
     <ClInclude Include="ZView.h" />
@@ -155,6 +157,7 @@
     <ClCompile Include="Ressources\ZTextureManager.cpp" />
     <ClCompile Include="TileMap\ZTiledMap.cpp" />
     <ClCompile Include="TileMap\CZTiledMapManager.cpp" />
+    <ClCompile Include="Render\ZTextRenderComponent.cpp" />
     <ClCompile Include="ZTimeManager.cpp" />
     <ClCompile Include="Actors\ZTransformComponent.cpp" />
     <ClCompile Include="ZView.cpp" />

@@ -21,7 +21,6 @@ namespace ZEngine
 		float m_fRadius;
 		float m_fThickness;
 		int m_nNbPoints;
-		virtual void UpdatePosition();
 
 	public:
 		CZCircleShapeRenderComponent(CZActor & p_pOwner, float p_nRadius = 5.0f, CZWindow & p_pWindowOwner = CZWindowManager::GetWindow(0));

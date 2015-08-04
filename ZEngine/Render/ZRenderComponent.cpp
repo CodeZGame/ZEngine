@@ -6,6 +6,7 @@
 
 #include "ZRenderComponent.h"
 #include "ZWindow.h"
+#include "../Types/ZSFMLConvert.h"
 
 using namespace ZEngine;
 
@@ -25,4 +26,16 @@ CZRenderComponent :: CZRenderComponent(CZActor & p_pOwner, sf::Drawable & p_pDra
 //-----------------------------------------------------------
 CZRenderComponent :: ~CZRenderComponent()
 {
+}
+
+#pragma  message("TODO: Test performance of dynamic_cast VS reinterpret")
+//-----------------------------------------------------------
+//
+//-----------------------------------------------------------
+void CZRenderComponent :: UpdatePosition()
+{
+	//Update the sfml object position using current Actor position
+	//Dynamic cast to Transformable, all sfml drawable objects inherit from it
+	//Except Vertex Array (careful with those !)
+	dynamic_cast<sf::Transformable&>(m_pSfmlDrawable).setPosition(ZVectorToSf(m_pOwner.m_Transform.m_position));
 }
